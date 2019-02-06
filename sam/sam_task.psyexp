@@ -317,7 +317,7 @@
     <LoopInitiator loopType="TrialHandler" name="trials">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
       <Param name="conditions" updates="None" val="[OrderedDict([('condition', 'calm'), ('question', 'In the last rest period, to what extent did you feel calm?'), ('text1', 'very calm'), ('text2', 'very excited'), ('img1', 'images/Arousal_5.bmp'), ('img2', 'images/Arousal_4.bmp'), ('img3', 'images/Arousal_3.bmp'), ('img4', 'images/Arousal_2.bmp'), ('img5', 'images/Arousal_1.bmp')]), OrderedDict([('condition', 'challenging'), ('question', 'In the last task period, to what extent did you feel &quot;in-control&quot; when the task was MOST challenging?'), ('text1', 'very little control'), ('text2', 'very in-control'), ('img1', 'images/Dominance_1.bmp'), ('img2', 'images/Dominance_2.bmp'), ('img3', 'images/Dominance_3.bmp'), ('img4', 'images/Dominance_4.bmp'), ('img5', 'images/Dominance_5.bmp')]), OrderedDict([('condition', 'valence'), ('question', 'In the last task period, to what extent did you feel happy or unhappy when the task was MOST challenging?'), ('text1', 'very unhappy'), ('text2', 'very happy'), ('img1', 'images/Valence_1.bmp'), ('img2', 'images/Valence_2.bmp'), ('img3', 'images/Valence_3.bmp'), ('img4', 'images/Valence_4.bmp'), ('img5', 'images/Valence_5.bmp')])]" valType="str"/>
-      <Param name="conditionsFile" updates="None" val="sam_rest_conditions.csv" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="sam_task_conditions.csv" valType="str"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="sequential" valType="str"/>

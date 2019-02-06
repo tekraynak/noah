@@ -1,0 +1,4 @@
+condition,question,text1,text2,img1,img2,img3,img4,img5
+calm,"In the last rest period, to what extent did you feel calm?",very calm,very excited,images/Arousal_5.bmp,images/Arousal_4.bmp,images/Arousal_3.bmp,images/Arousal_2.bmp,images/Arousal_1.bmp
+challenging,"In the last task period, to what extent did you feel ""in-control"" when the task was MOST challenging?",very little control,very in-control,images/Dominance_1.bmp,images/Dominance_2.bmp,images/Dominance_3.bmp,images/Dominance_4.bmp,images/Dominance_5.bmp
+valence,"In the last task period, to what extent did you feel happy or unhappy when the task was MOST challenging?",very unhappy,very happy,images/Valence_1.bmp,images/Valence_2.bmp,images/Valence_3.bmp,images/Valence_4.bmp,images/Valence_5.bmp
