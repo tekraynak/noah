@@ -4,6 +4,12 @@ Certain parameters of this task can be altered according to the experimenter's w
 
 These parameters and their defaults are described in lines 73-94 of the script (see below). 
 
+
+
+
+
+
+
 # set number of blocks in experiment (default = 4)
 # NOTE: one block = rest + incongruent + rest + congruent
 numBlocks = 2
