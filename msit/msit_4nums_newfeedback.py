@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v3.0.0b12),
-    on Tue Feb 12 17:12:36 2019
+    on Thu Feb 28 08:38:02 2019
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -68,26 +68,32 @@ else:
 
 # Initialize components for Routine "instructions"
 instructionsClock = core.Clock()
-# these are the basic experimental parameters that the user can manipulate:
+import numpy as np
+
+######################################################
+# EXPERIMENTAL PARAMETERS THAT THE USER CAN MANIPULATE:
+######################################################
 
 # set number of blocks in experiment (default = 4)
 # NOTE: one block = rest + incongruent + rest + congruent
 numBlocks = 2
 
 # set duration for incongruent/congruent blocks (default is 60s)
-# needs to be dividible by 10
-blockLength = 20
+# must be divisible by 10
+blockLength = 30
 
 # set duration for rest periods (default = 10)
 # note this will be padded with a few varying seconds
-# needs to be dividible by 10
+# must be divisible by 10
 restDuration = 10
 
 # set how many stimuli are in a trial (3 or 4)
 # PIP used 3, NOAH plans to use 4
-# this will change the look of trial and feedback
+# this will change the appearance of trial and feedback
 # NOTE: currently only set for 4
 numStims = 4
+
+######################################################
 instructions_text = visual.TextStim(win=win, name='instructions_text',
     text='    instructions:\n\npress "space" to start',
     font='Arial',
@@ -119,8 +125,6 @@ rest_begin_crosshair = visual.TextStim(win=win, name='rest_begin_crosshair',
 
 # Initialize components for Routine "trial"
 trialClock = core.Clock()
-import numpy as np
-
 # for 1st trial of task (during 1st incongruent block), allowed response time is 5 seconds
 allowedRT = 5
 
@@ -184,7 +188,7 @@ endClock = core.Clock()
 end_text = visual.TextStim(win=win, name='end_text',
     text='THANK YOU!',
     font='Arial',
-    pos=(0, 0), height=0.3, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=0.2, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
@@ -455,7 +459,17 @@ for thisMsit_block_condition_order in msit_block_condition_order:
         # for 2nd trial, record the prior RT and add 300ms to it for subsequent trials
         # for trial 2-n, use titration methods below
         if Condition == 'Incongruent' and msit_block_condition_order.thisN == 0 and trial_list.thisN == 1:
-            allowedRT = resp.rt + .3
+            if resp.keys:
+                allowedRT = resp.rt + .3
+            else: # if for some reason there is not a respone on trial 1
+                allowedRT = 5000 
+        
+        # for CONGRUENT blocks, set ITI to the mean ITI of the prior incongruent block
+        if Condition == 'Congruent' and trial_list.thisN == 0:
+            if np.isfinite(meanRT):
+                allowedRT = meanRT
+            else:
+                allowedRT = 5000
         
         # for INCONGRUENT blocks, titrate allowed reaction time (ITI)
         # if participant is correct 3 trials in a row, shorten allowed time by 300ms
@@ -465,10 +479,6 @@ for thisMsit_block_condition_order in msit_block_condition_order:
                 allowedRT = allowedRT - .3
             if numConsecutiveIncorrect >= 3:
                 allowedRT = allowedRT + .3
-                
-        # for CONGRUENT blocks, set ITI to the mean ITI of the prior incongruent block
-        if Condition == 'Congruent' and trial_list.thisN == 0:
-            allowedRT = meanRT
         
         # do not allow the ITI to get too long or too short
         if allowedRT < .4:
@@ -631,6 +641,8 @@ for thisMsit_block_condition_order in msit_block_condition_order:
             feedbackLength = 1
         elif Condition == 'Congruent':
             conTrialLength = (blockLength - restDurationPad) / numCompletedTrials
+            conTrialLength = np.floor(conTrialLength*10)/10 # round down to 1 decimal point
+            thisExp.addData('conTrialLength', conTrialLength)
             if resp.keys:
                 feedbackLength = conTrialLength - resp.rt
             else:
@@ -789,6 +801,7 @@ for thisMsit_block_condition_order in msit_block_condition_order:
     restOnset = globalClock.getTime() - scannerTriggerOnset
     restDurationPad = ((round(restOnset/10))*10) - restOnset
     
+    thisExp.addData('restOnset', restOnset)
     thisExp.addData('thisRestDuration', restDuration + restDurationPad)
     
     # keep track of which components have finished
