@@ -1,0 +1,1899 @@
+'
+'
+'
+'	C:\Users\Ginaros\Desktop\Gianaros\NEW_Tasks\StroopColor_Scanner_New.ebs
+'	Generated on: 6/7/2013	10:42:14
+'
+'
+'	This file generated with E-Studio interface.
+'	E-Prime Copyright © 1996-2005 Psychology Software Tools.
+'	ALL RIGHTS RESERVED
+'
+'	Legal use of this experiment script requires a full E-Prime or Runtime License.
+'
+'
+'	Author:
+'		Qi Shi, WPIC of UPMC
+'
+'
+'
+'
+
+Option CStrings On
+Dim ebContext as Context
+
+
+'--------------------------------------------------------------------------
+' Class Declarations
+'--------------------------------------------------------------------------
+
+
+
+'--------------------------------------------------------------------------
+'InitTextDisplayDefaults
+'--------------------------------------------------------------------------
+Sub InitTextDisplayDefaults(theTextDisplay As TextDisplay)
+
+	If theTextDisplay Is Nothing Then Exit Sub
+
+	theTextDisplay.X = "center"
+	theTextDisplay.Y = "center"
+	theTextDisplay.Width = "100%"
+	theTextDisplay.Height = "100%"
+	theTextDisplay.ForeColor = CColor("black")
+	theTextDisplay.BackColor = CColor("white")
+	theTextDisplay.BackStyle = "opaque"
+	theTextDisplay.BorderColor = CColor("black")
+	theTextDisplay.BorderWidth = CLng("0")
+	theTextDisplay.XAlign = "center"
+	theTextDisplay.YAlign = "center"
+	theTextDisplay.AlignHorizontal = "center"
+	theTextDisplay.AlignVertical = "center"
+	theTextDisplay.WordWrap = True
+	theTextDisplay.ClearAfter = CLogical("No")
+	theTextDisplay.FontName = "Courier New"
+	theTextDisplay.FontSize = "18"
+	theTextDisplay.FontBold = CLogical("Yes")
+	theTextDisplay.FontItalic = CLogical("No")
+	theTextDisplay.FontUnderline = CLogical("No")
+	theTextDisplay.FontStrikeout = CLogical("No")
+
+End Sub
+
+
+
+
+
+
+'--------------------------------------------------------------------------
+'InitSlideStateDefaults
+'--------------------------------------------------------------------------
+Sub InitSlideStateDefaults(theSlideState As SlideState)
+
+	If theSlideState Is Nothing Then Exit Sub
+
+	theSlideState.X = "center"
+	theSlideState.Y = "center"
+	theSlideState.Width = "100%"
+	theSlideState.Height = "100%"
+	theSlideState.BackColor = CColor("white")
+	theSlideState.BackStyle = "opaque"
+	theSlideState.BorderColor = CColor("black")
+	theSlideState.BorderWidth = CLng("0")
+	theSlideState.XAlign = "center"
+	theSlideState.YAlign = "center"
+	theSlideState.ClearAfter = CLogical("No")
+	theSlideState.Enabled = CLogical("Yes")
+
+End Sub
+
+'--------------------------------------------------------------------------
+'InitSlideVisualStimDefaults
+'--------------------------------------------------------------------------
+Sub InitSlideVisualStimDefaults(theSlideVisualStim As SlideVisualStim)
+
+	If theSlideVisualStim Is Nothing Then Exit Sub
+
+	theSlideVisualStim.X = "center"
+	theSlideVisualStim.Y = "center"
+	theSlideVisualStim.Width = "25%"
+	theSlideVisualStim.Height = "25%"
+	theSlideVisualStim.ForeColor = CColor("black")
+	theSlideVisualStim.BackColor = CColor("white")
+	theSlideVisualStim.BackStyle = "opaque"
+	theSlideVisualStim.BorderColor = CColor("black")
+	theSlideVisualStim.BorderWidth = CLng("0")
+	theSlideVisualStim.XAlign = "center"
+	theSlideVisualStim.YAlign = "center"
+	theSlideVisualStim.AlignHorizontal = "center"
+	theSlideVisualStim.AlignVertical = "center"
+
+End Sub
+
+'--------------------------------------------------------------------------
+'InitSlideTextDefaults
+'--------------------------------------------------------------------------
+Sub InitSlideTextDefaults(theSlideText As SlideText)
+
+	If theSlideText Is Nothing Then Exit Sub
+
+	InitSlideVisualStimDefaults theSlideText
+
+	theSlideText.WordWrap = True
+	theSlideText.FontName = "Courier New"
+	theSlideText.FontSize = "18"
+	theSlideText.FontBold = CLogical("Yes")
+	theSlideText.FontItalic = CLogical("No")
+	theSlideText.FontUnderline = CLogical("No")
+	theSlideText.FontStrikeout = CLogical("No")
+
+End Sub
+
+'--------------------------------------------------------------------------
+'InitSlideImageDefaults
+'--------------------------------------------------------------------------
+Sub InitSlideImageDefaults(theSlideImage As SlideImage)
+
+	If theSlideImage Is Nothing Then Exit Sub
+
+	InitSlideVisualStimDefaults theSlideImage
+
+	theSlideImage.Stretch = CLogical("No")
+	theSlideImage.MirrorLeftRight = CLogical("No")
+	theSlideImage.MirrorUpDown = CLogical("No")
+	theSlideImage.UseSourceColorKey = CLogical("No")
+	theSlideImage.SourceColorKey = CColor("black")
+
+End Sub
+
+'--------------------------------------------------------------------------
+'InitSlideSoundBufferDefaults
+'--------------------------------------------------------------------------
+Sub InitSlideSoundBufferDefaults(theSoundBuffer As SoundBuffer)
+
+	If theSoundBuffer Is Nothing Then Exit Sub
+
+	theSoundBuffer.Loop = CLogical("No")
+	theSoundBuffer.StopAfter = CLogical("Yes")
+	theSoundBuffer.StartOffset = "0"
+	theSoundBuffer.StopOffset = "0"
+
+End Sub
+
+
+
+
+
+
+'--------------------------------------------------------------------------
+' Instance Declarations
+'--------------------------------------------------------------------------
+Dim Display As DisplayDevice
+Dim Sound As SoundDevice
+Dim Keyboard As KeyboardDevice
+Dim Mouse As MouseDevice
+Dim SRBOX As SRBOXDevice
+Dim SessionProc As Procedure
+
+Dim InconList As List
+
+Dim InconTrialProc As Procedure
+
+Dim Fixation As TextDisplay
+
+Dim ThankYou As TextDisplay
+
+Dim BlockList As List
+
+Dim InconProc As Procedure
+
+Dim ConProc As Procedure
+
+Dim ConList As List
+
+Dim ConTrialProc As Procedure
+
+Dim TrialDisplay As Slide
+Dim TrialDisplayEchoClients As EchoClientCollection
+Dim TrialDisplay_State As SlideState
+Dim TrialDisplay_SlideText As SlideText
+
+Dim Instr As TextDisplay
+Dim InstrEchoClients As EchoClientCollection
+
+Dim WaitForScanner As TextDisplay
+Dim WaitForScannerEchoClients As EchoClientCollection
+
+
+
+'--------------------------------------------------------------------------
+' Package Declare Script
+'--------------------------------------------------------------------------
+
+
+
+'--------------------------------------------------------------------------
+' User Script
+'--------------------------------------------------------------------------
+dim fstBtn, sndBtn, thdBtn, fthBtn as string
+
+dim cnvs As Canvas
+dim fixationWid, fixationR as long
+dim IsIncon as boolean
+
+dim backColor, fontSize as string
+dim xWidth, xColor, checkWidth, checkColor as string
+dim blockTime, blockStartTime, TrialDuration, titration, checkTime, xTime, checkAfterXTime, noRespTime as long
+dim BkBgFxDu as long
+dim TrialNo as integer
+dim TotalInconTrials as integer
+dim TotalInconAcc as integer
+dim PreInconNoTrials as integer
+
+sub DrawRect(byval x as long, byval y as long, _
+             byval w as long, byval h as long, _
+			 byval pColor as string, byval pWidth as string, _
+			 byval fColor as string, byref c as canvas)
+	c.backstyle = "transparent"
+	c.PenColor = CColor(pColor)
+	c.PenWidth = pWidth
+	c.FillColor = CColor(fColor)
+	c.Rectangle x, y, w, h
+	
+end sub
+
+sub WriteText(byref c as canvas, l as long, t as long, txt as string, _
+			  byval bcolor as string, tcolor as string, fsize as string)
+	c.FontSize = fsize
+	c.FontName = "TimesNewRoman"
+	c.FontBold = CLogical("No")
+	c.TextBackColor = CColor (bcolor)
+	c.TextColor = CColor (tcolor)
+	c.Text l, t, txt
+end sub
+
+sub DrawX(byval x as long, byval y as long, _
+             byval w as long, byval h as long, _
+			 byval pColor as string, byval pWidth as string, _
+			 byval fColor as string, byref c as canvas)
+	c.backstyle = "transparent"
+	c.PenColor = CColor(pColor)
+	c.PenWidth = pWidth
+	c.FillColor = CColor(fColor)
+	c.Line x, y, x+w, y+h+20
+	c.Line x, y+h+20, x+w, y
+end sub
+
+sub DrawCheck(byval x as long, byval y as long, _             
+			 byval pColor as string, byval pWidth as string, _
+			 byval fColor as string, byref c as canvas)
+	c.backstyle = "transparent"
+	c.PenColor = CColor(pColor)
+	c.PenWidth = pWidth
+	c.FillColor = CColor(fColor)
+	c.Line x-20, y-50, x, y
+	c.Line x, y, x+60, y-80
+end sub
+
+sub DrawCross(byval r as long, byval wid as long, byref c as canvas)
+	c.clear
+	c.PenColor = CColor("white")
+	c.PenWidth = wid
+	c.Line Display.XRes/2-r, Display.YRes/2, Display.XRes/2+r, Display.YRes/2
+	c.Line Display.XRes/2, Display.YRes/2-r, Display.XRes/2, Display.YRes/2+r
+end sub
+
+function ConvertToColor(byval n as integer) as string
+	select case n
+	case 1
+		ConvertToColor="red"
+	case 2
+		ConvertToColor="green"
+	case 3
+		ConvertToColor="blue"
+	case 4
+		ConvertToColor="yellow"
+	case else
+		ConvertToColor="black"
+	end select
+end function
+
+
+'--------------------------------------------------------------------------
+' Package Global Script
+'--------------------------------------------------------------------------
+
+
+
+'--------------------------------------------------------------------------
+' Package Routines
+'--------------------------------------------------------------------------
+
+
+
+'--------------------------------------------------------------------------
+' Implementation
+'--------------------------------------------------------------------------
+Sub SessionProc_Run(c as Context)
+	
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - Init BEGIN
+	'''''''''''''''''''''''''''''''''''''''''''''
+	fstBtn = "1"
+sndBtn = "2"
+thdBtn = "3"
+fthBtn = "4"
+
+
+Set cnvs = Display.Canvas
+cnvs.fillcolor = ccolor("black")
+
+backColor="black"
+fontSize="40"
+
+BkBgFxDu=10000
+
+
+blockTime=70000
+TrialDuration=5000
+titration=250
+
+xWidth="8"
+xColor="red"
+checkWidth="8"
+checkColor="white"
+xTime=500
+checkTime=1000
+checkAfterXTime=500
+noRespTime=1000
+
+fixationWid=5
+fixationR=80
+
+TotalInconTrials=0
+TotalInconAcc=0
+
+mouse.showcursor false
+
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - Init END
+	'''''''''''''''''''''''''''''''''''''''''''''
+	
+	
+	
+	Instr.InputMasks.Reset
+	
+	If Keyboard.GetState() = ebStateOpen Then
+		InstrEchoClients.RemoveAll
+		Instr.InputMasks.Add Keyboard.CreateInputMask("{SPACE}", "", CLng(Instr.Duration), CLng("1"), ebEndResponseActionTerminate, CLogical("Yes"), "", "", "ResponseMode:All ProcessBackspace:Yes")
+
+	
+	End If
+
+	Instr.Run
+	c.SetAttrib Instr.Name & ".OnsetDelay", Instr.OnsetDelay
+	c.SetAttrib Instr.Name & ".OnsetTime", Instr.OnsetTime
+	c.SetAttrib Instr.Name & ".DurationError", Instr.DurationError
+	
+	
+	
+	WaitForScanner.InputMasks.Reset
+	
+	If Keyboard.GetState() = ebStateOpen Then
+		WaitForScannerEchoClients.RemoveAll
+		WaitForScanner.InputMasks.Add Keyboard.CreateInputMask("{^}", "", CLng(WaitForScanner.Duration), CLng("1"), ebEndResponseActionTerminate, CLogical("Yes"), "", "", "ResponseMode:All ProcessBackspace:Yes")
+
+	
+	End If
+
+	WaitForScanner.Run
+	c.SetAttrib WaitForScanner.Name & ".OnsetDelay", WaitForScanner.OnsetDelay
+	c.SetAttrib WaitForScanner.Name & ".OnsetTime", WaitForScanner.OnsetTime
+	c.SetAttrib WaitForScanner.Name & ".DurationError", WaitForScanner.DurationError
+	
+	BlockList.Run c
+	
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - CalInconAcc BEGIN
+	'''''''''''''''''''''''''''''''''''''''''''''
+	if totalincontrials>0 then
+	c.setattrib "ACC", csng(TotalInconAcc)/csng(totalInconTrials)*100
+	thankyou.acc=c.getattrib("ACC")
+end if
+
+mouse.showcursor true
+
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - CalInconAcc END
+	'''''''''''''''''''''''''''''''''''''''''''''
+	
+	
+	ThankYou.Run
+	c.SetAttrib ThankYou.Name & ".OnsetDelay", ThankYou.OnsetDelay
+	c.SetAttrib ThankYou.Name & ".OnsetTime", ThankYou.OnsetTime
+	c.SetAttrib ThankYou.Name & ".DurationError", ThankYou.DurationError
+	
+	c.SetAttrib Instr.Name & ".OnsetDelay", Instr.OnsetDelay
+	c.SetAttrib Instr.Name & ".OnsetTime", Instr.OnsetTime
+	c.SetAttrib Instr.Name & ".DurationError", Instr.DurationError
+	
+	c.SetAttrib WaitForScanner.Name & ".OnsetDelay", WaitForScanner.OnsetDelay
+	c.SetAttrib WaitForScanner.Name & ".OnsetTime", WaitForScanner.OnsetTime
+	c.SetAttrib WaitForScanner.Name & ".DurationError", WaitForScanner.DurationError
+	
+	c.SetAttrib ThankYou.Name & ".OnsetDelay", ThankYou.OnsetDelay
+	c.SetAttrib ThankYou.Name & ".OnsetTime", ThankYou.OnsetTime
+	c.SetAttrib ThankYou.Name & ".DurationError", ThankYou.DurationError
+	
+
+	 
+
+
+#If RUNTIME_VERSION_MAJOR > 1  Or (RUNTIME_VERSION_MAJOR = 1 And RUNTIME_VERSION_MINOR >= 2) Then
+	' Log clock timing information
+	c.SetAttrib "Clock.Information", Clock.Information
+#End If
+
+
+	c.Log
+End Sub
+
+Sub InconTrialProc_Run(c as Context)
+	
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - Preset BEGIN
+	'''''''''''''''''''''''''''''''''''''''''''''
+	TrialDisplay.duration = TrialDuration
+
+Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects("txtw4"))
+TrialDisplay_SlideText.Text = ConvertToColor(c.GetAttrib("w4"))
+TrialDisplay_SlideText.ForeColor = CColor(ConvertToColor(c.GetAttrib("w4color")))
+Set TrialDisplay_SlideText = Nothing
+
+Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects("txtw3"))
+TrialDisplay_SlideText.Text = ConvertToColor(c.GetAttrib("w3"))
+TrialDisplay_SlideText.ForeColor = CColor(ConvertToColor(c.GetAttrib("w3color")))
+Set TrialDisplay_SlideText = Nothing
+
+Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects("txtw2"))
+TrialDisplay_SlideText.Text = ConvertToColor(c.GetAttrib("w2"))
+TrialDisplay_SlideText.ForeColor = CColor(ConvertToColor(c.GetAttrib("w2color")))
+Set TrialDisplay_SlideText = Nothing
+
+Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects("txtw1"))
+TrialDisplay_SlideText.Text = ConvertToColor(c.GetAttrib("w1"))
+TrialDisplay_SlideText.ForeColor = CColor(ConvertToColor(c.GetAttrib("w1color")))
+Set TrialDisplay_SlideText = Nothing
+
+Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects("txttarget"))
+TrialDisplay_SlideText.Text = ConvertToColor(c.GetAttrib("Target"))
+TrialDisplay_SlideText.ForeColor = CColor(ConvertToColor(c.GetAttrib("targetColor")))
+Set TrialDisplay_SlideText = Nothing
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - Preset END
+	'''''''''''''''''''''''''''''''''''''''''''''
+	
+	
+	
+	Select Case TrialDisplay.ActiveState
+		Case "Default"
+
+
+			Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects(1))
+			Set TrialDisplay_SlideText = Nothing
+
+			Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects(2))
+			Set TrialDisplay_SlideText = Nothing
+
+			Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects(3))
+			Set TrialDisplay_SlideText = Nothing
+
+			Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects(4))
+			Set TrialDisplay_SlideText = Nothing
+
+			Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects(5))
+			Set TrialDisplay_SlideText = Nothing
+		Case "State1"
+
+
+			Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("State1").Objects(1))
+			Set TrialDisplay_SlideText = Nothing
+	End Select
+
+	
+	TrialDisplay.InputMasks.Reset
+	
+	If Keyboard.GetState() = ebStateOpen Then
+		TrialDisplayEchoClients.RemoveAll
+		TrialDisplay.InputMasks.Add Keyboard.CreateInputMask("1234", "", CLng(TrialDisplay.Duration), CLng("1"), ebEndResponseActionTerminate, CLogical("Yes"), "", "", "ResponseMode:All ProcessBackspace:Yes")
+
+	
+	End If
+
+	TrialDisplay.Run
+	
+	c.SetAttrib TrialDisplay.Name & ".OnsetDelay", TrialDisplay.OnsetDelay
+	c.SetAttrib TrialDisplay.Name & ".OnsetTime", TrialDisplay.OnsetTime
+	c.SetAttrib TrialDisplay.Name & ".DurationError", TrialDisplay.DurationError
+	c.SetAttrib TrialDisplay.Name & ".RTTime", TrialDisplay.RTTime
+	c.SetAttrib TrialDisplay.Name & ".ACC", TrialDisplay.ACC
+	c.SetAttrib TrialDisplay.Name & ".RT", TrialDisplay.RT
+	c.SetAttrib TrialDisplay.Name & ".RESP", TrialDisplay.RESP
+	c.SetAttrib TrialDisplay.Name & ".CRESP", TrialDisplay.CRESP
+	
+	
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - FeedBack BEGIN
+	'''''''''''''''''''''''''''''''''''''''''''''
+	dim AnswerIsRight as boolean
+AnswerIsRight=false
+
+dim CurTrialDur as long
+
+if TrialDisplay.RTTime>0 then
+	CurTrialDur=TrialDisplay.RTTime-TrialDisplay.OnsetTime
+else
+	CurTrialDur=TrialDuration
+end if
+
+select case TrialDisplay.resp
+	case fstBtn
+		if c.getattrib("w1")=c.getattrib("TargetColor") then
+			DrawCheck Display.XRes*.14, Display.YRes*.66, checkColor, checkWidth, backColor, cnvs
+			'TrialDisplay.ACC=1
+			AnswerIsRight=true
+			sleep checkTime
+			CurTrialDur=CurTrialDur+checkTime
+			TrialDisplay.CRESP=fstBtn
+		else
+			DrawX Display.XRes*.09, Display.YRes*.62, Display.XRes*.10, Display.YRes*.16, xColor, xWidth, backColor, cnvs
+			'TrialDisplay.ACC=0
+			AnswerIsRight=false
+			sleep xTime
+			CurTrialDur=CurTrialDur+xTime
+		end if
+	case sndBtn
+		if c.getattrib("w2")=c.getattrib("TargetColor") then
+			DrawCheck Display.XRes*.38, Display.YRes*.66, checkcolor, checkWidth, backColor, cnvs
+			'TrialDisplay.ACC=1
+			AnswerIsRight=true
+			sleep checkTime
+			CurTrialDur=CurTrialDur+checkTime
+			TrialDisplay.CRESP=sndBtn
+		else
+			DrawX Display.XRes*.33, Display.YRes*.62, Display.XRes*.10, Display.YRes*.16, xColor, xWidth, backColor, cnvs
+			'TrialDisplay.ACC=0
+			AnswerIsRight=false
+			sleep xTime
+			CurTrialDur=CurTrialDur+xTime
+		end if
+	case thdBtn
+		if c.getattrib("w3")=c.getattrib("TargetColor") then	
+			DrawCheck Display.XRes*.62, Display.YRes*.66, checkColor, checkWidth, backColor, cnvs
+			'TrialDisplay.ACC=1
+			AnswerIsRight=true
+			sleep checkTime
+			CurTrialDur=CurTrialDur+checkTime
+			TrialDisplay.CRESP=thdBtn
+		else
+			DrawX Display.XRes*.57, Display.YRes*.62, Display.XRes*.10, Display.YRes*.16, xColor, xWidth, backColor, cnvs
+			'TrialDisplay.ACC=0
+			AnswerIsRight=false
+			sleep xTime
+			CurTrialDur=CurTrialDur+xTime
+		end if
+	case fthBtn
+		if c.getattrib("w4")=c.getattrib("TargetColor") then	
+			DrawCheck Display.XRes*.86, Display.YRes*.66, checkColor, checkWidth, backColor, cnvs
+			'TrialDisplay.ACC=1
+			AnswerIsRight=true
+			sleep checkTime
+			CurTrialDur=CurTrialDur+checkTime
+			TrialDisplay.CRESP=fthBtn	
+		else
+			DrawX Display.XRes*.81, Display.YRes*.62, Display.XRes*.10, Display.YRes*.16, xColor, xWidth, backColor, cnvs
+			'TrialDisplay.ACC=0
+			AnswerIsRight=false
+			sleep xTime
+			CurTrialDur=CurTrialDur+xTime		
+		end if
+	case else
+		cnvs.clear
+		'TrialDisplay.ACC=0
+		TrialDisplay.ActiveState = "State1"
+		TrialDisplay.draw
+		AnswerIsRight=false
+		sleep noRespTime
+		CurTrialDur=CurTrialDur+noRespTime
+		TrialDisplay.ActiveState = "default"
+end select
+
+if IsIncon=true then
+	TotalInconTrials=TotalInconTrials+1
+	if AnswerIsRight then 
+		TotalInconAcc=TotalInconAcc+1
+	end if
+end if
+ 
+if AnswerIsRight then
+	if IsIncon and TrialDuration-titration>=1000 and TrialNo>2 then
+		TrialDuration=TrialDuration-titration
+	end if	
+	TrialDisplay.ACC=1	
+else
+	if IsIncon and TrialDuration+titration<=5000 and TrialNo>2 then
+		TrialDuration=TrialDuration+titration
+	end if
+	TrialDisplay.ACC=0
+end if
+
+
+if TrialDisplay.ACC=0 and TrialDisplay.RESP<>"" then
+	select case c.getattrib("TargetColor")
+		case c.getattrib("w1")
+			DrawCheck Display.XRes*.14, Display.YRes*.66, checkColor, checkWidth, backColor, cnvs
+		case c.getattrib("w2")
+			DrawCheck Display.XRes*.38, Display.YRes*.66, checkcolor, checkWidth, backColor, cnvs
+		case c.getattrib("w3")
+			DrawCheck Display.XRes*.62, Display.YRes*.66, checkColor, checkWidth, backColor, cnvs
+		case c.getattrib("w4")
+			DrawCheck Display.XRes*.86, Display.YRes*.66, checkColor, checkWidth, backColor, cnvs
+	end select
+
+	sleep checkAfterXTime
+	CurTrialDur=CurTrialDur+checkAfterXTime
+end if
+
+if IsIncon=false and TrialDisplay.RTTime>0 then
+	sleep TrialDuration+checkTime-CurTrialDur
+	CurTrialDur=TrialDuration+checkTime
+end if
+
+if (IsIncon=false and TrialNo=PreInconNoTrials) or _
+	(IsIncon=true and blocktime-(TrialDisplay.OnsetTime+CurTrialDur-blockstarttime)<=TrialDuration+checkTime) then
+	DrawCross fixationR, fixationWid, cnvs
+	sleep blocktime-(TrialDisplay.OnsetTime+CurTrialDur-blockstarttime)-20
+	c.setattrib "BlockTrialsLen", TrialDisplay.OnsetTime+CurTrialDur-blockstarttime-BkBgFxDu
+	c.setattrib "BlockCrossLen", blocktime-(TrialDisplay.OnsetTime+CurTrialDur-blockstarttime)
+	if IsIncon then
+		PreInconNoTrials=TrialNo
+		InconList.Terminate
+	else
+		ConList.Terminate
+	end if
+end if
+
+
+if IsIncon and TrialNo=2 and TrialDisplay.RESP<>"" and TrialDisplay.ACC=1 then
+	TrialDuration=TrialDisplay.RT
+end if
+
+TrialNo=TrialNo+1
+
+If GetUserBreakState <> 0 Then
+	if IsIncon then
+		InconList.Terminate
+		BlockList.Terminate
+	else
+		ConList.Terminate
+		BlockList.Terminate
+	end if
+end if
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - FeedBack END
+	'''''''''''''''''''''''''''''''''''''''''''''
+	
+	c.SetAttrib TrialDisplay.Name & ".OnsetDelay", TrialDisplay.OnsetDelay
+	c.SetAttrib TrialDisplay.Name & ".OnsetTime", TrialDisplay.OnsetTime
+	c.SetAttrib TrialDisplay.Name & ".DurationError", TrialDisplay.DurationError
+	c.SetAttrib TrialDisplay.Name & ".RTTime", TrialDisplay.RTTime
+	c.SetAttrib TrialDisplay.Name & ".ACC", TrialDisplay.ACC
+	c.SetAttrib TrialDisplay.Name & ".RT", TrialDisplay.RT
+	c.SetAttrib TrialDisplay.Name & ".RESP", TrialDisplay.RESP
+	c.SetAttrib TrialDisplay.Name & ".CRESP", TrialDisplay.CRESP
+	
+
+	c.Log
+End Sub
+
+Sub InconProc_Run(c as Context)
+	
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - DrawFixation BEGIN
+	'''''''''''''''''''''''''''''''''''''''''''''
+	DrawCross fixationR, fixationWid, cnvs
+Fixation.duration=BkBgFxDu
+
+if c.getattrib("Procedure")="InconProc" then
+	TrialDuration=5000
+	IsIncon=true
+else
+	TrialDuration=(BlockTime-BkBgFxDu-3000)/PreInconNoTrials-checkTime
+	IsIncon=false
+end if
+
+TrialNo=1
+
+'blockStartTime=-1
+
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - DrawFixation END
+	'''''''''''''''''''''''''''''''''''''''''''''
+	
+	
+	Fixation.Run
+	c.SetAttrib Fixation.Name & ".OnsetDelay", Fixation.OnsetDelay
+	c.SetAttrib Fixation.Name & ".OnsetTime", Fixation.OnsetTime
+	c.SetAttrib Fixation.Name & ".DurationError", Fixation.DurationError
+	
+	
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - SetBlockLevelParas BEGIN
+	'''''''''''''''''''''''''''''''''''''''''''''
+	'if blockstarttime=-1 then blockstarttime=Fixation.onsettime
+blockstarttime=Fixation.onsettime
+
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - SetBlockLevelParas END
+	'''''''''''''''''''''''''''''''''''''''''''''
+	
+	InconList.Run c
+	c.SetAttrib Fixation.Name & ".OnsetDelay", Fixation.OnsetDelay
+	c.SetAttrib Fixation.Name & ".OnsetTime", Fixation.OnsetTime
+	c.SetAttrib Fixation.Name & ".DurationError", Fixation.DurationError
+	
+
+	c.Log
+End Sub
+
+Sub ConProc_Run(c as Context)
+	
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - DrawFixation BEGIN
+	'''''''''''''''''''''''''''''''''''''''''''''
+	DrawCross fixationR, fixationWid, cnvs
+Fixation.duration=BkBgFxDu
+
+if c.getattrib("Procedure")="InconProc" then
+	TrialDuration=5000
+	IsIncon=true
+else
+	TrialDuration=(BlockTime-BkBgFxDu-3000)/PreInconNoTrials-checkTime
+	IsIncon=false
+end if
+
+TrialNo=1
+
+'blockStartTime=-1
+
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - DrawFixation END
+	'''''''''''''''''''''''''''''''''''''''''''''
+	
+	
+	Fixation.Run
+	c.SetAttrib Fixation.Name & ".OnsetDelay", Fixation.OnsetDelay
+	c.SetAttrib Fixation.Name & ".OnsetTime", Fixation.OnsetTime
+	c.SetAttrib Fixation.Name & ".DurationError", Fixation.DurationError
+	
+	
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - SetBlockLevelParas BEGIN
+	'''''''''''''''''''''''''''''''''''''''''''''
+	'if blockstarttime=-1 then blockstarttime=Fixation.onsettime
+blockstarttime=Fixation.onsettime
+
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - SetBlockLevelParas END
+	'''''''''''''''''''''''''''''''''''''''''''''
+	
+	ConList.Run c
+	c.SetAttrib Fixation.Name & ".OnsetDelay", Fixation.OnsetDelay
+	c.SetAttrib Fixation.Name & ".OnsetTime", Fixation.OnsetTime
+	c.SetAttrib Fixation.Name & ".DurationError", Fixation.DurationError
+	
+
+	c.Log
+End Sub
+
+Sub ConTrialProc_Run(c as Context)
+	
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - Preset BEGIN
+	'''''''''''''''''''''''''''''''''''''''''''''
+	TrialDisplay.duration = TrialDuration
+
+Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects("txtw4"))
+TrialDisplay_SlideText.Text = ConvertToColor(c.GetAttrib("w4"))
+TrialDisplay_SlideText.ForeColor = CColor(ConvertToColor(c.GetAttrib("w4color")))
+Set TrialDisplay_SlideText = Nothing
+
+Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects("txtw3"))
+TrialDisplay_SlideText.Text = ConvertToColor(c.GetAttrib("w3"))
+TrialDisplay_SlideText.ForeColor = CColor(ConvertToColor(c.GetAttrib("w3color")))
+Set TrialDisplay_SlideText = Nothing
+
+Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects("txtw2"))
+TrialDisplay_SlideText.Text = ConvertToColor(c.GetAttrib("w2"))
+TrialDisplay_SlideText.ForeColor = CColor(ConvertToColor(c.GetAttrib("w2color")))
+Set TrialDisplay_SlideText = Nothing
+
+Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects("txtw1"))
+TrialDisplay_SlideText.Text = ConvertToColor(c.GetAttrib("w1"))
+TrialDisplay_SlideText.ForeColor = CColor(ConvertToColor(c.GetAttrib("w1color")))
+Set TrialDisplay_SlideText = Nothing
+
+Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects("txttarget"))
+TrialDisplay_SlideText.Text = ConvertToColor(c.GetAttrib("Target"))
+TrialDisplay_SlideText.ForeColor = CColor(ConvertToColor(c.GetAttrib("targetColor")))
+Set TrialDisplay_SlideText = Nothing
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - Preset END
+	'''''''''''''''''''''''''''''''''''''''''''''
+	
+	
+	
+	Select Case TrialDisplay.ActiveState
+		Case "Default"
+
+
+			Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects(1))
+			Set TrialDisplay_SlideText = Nothing
+
+			Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects(2))
+			Set TrialDisplay_SlideText = Nothing
+
+			Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects(3))
+			Set TrialDisplay_SlideText = Nothing
+
+			Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects(4))
+			Set TrialDisplay_SlideText = Nothing
+
+			Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("Default").Objects(5))
+			Set TrialDisplay_SlideText = Nothing
+		Case "State1"
+
+
+			Set TrialDisplay_SlideText = CSlideText(TrialDisplay.States.Item("State1").Objects(1))
+			Set TrialDisplay_SlideText = Nothing
+	End Select
+
+	
+	TrialDisplay.InputMasks.Reset
+	
+	If Keyboard.GetState() = ebStateOpen Then
+		TrialDisplayEchoClients.RemoveAll
+		TrialDisplay.InputMasks.Add Keyboard.CreateInputMask("1234", "", CLng(TrialDisplay.Duration), CLng("1"), ebEndResponseActionTerminate, CLogical("Yes"), "", "", "ResponseMode:All ProcessBackspace:Yes")
+
+	
+	End If
+
+	TrialDisplay.Run
+	
+	c.SetAttrib TrialDisplay.Name & ".OnsetDelay", TrialDisplay.OnsetDelay
+	c.SetAttrib TrialDisplay.Name & ".OnsetTime", TrialDisplay.OnsetTime
+	c.SetAttrib TrialDisplay.Name & ".DurationError", TrialDisplay.DurationError
+	c.SetAttrib TrialDisplay.Name & ".RTTime", TrialDisplay.RTTime
+	c.SetAttrib TrialDisplay.Name & ".ACC", TrialDisplay.ACC
+	c.SetAttrib TrialDisplay.Name & ".RT", TrialDisplay.RT
+	c.SetAttrib TrialDisplay.Name & ".RESP", TrialDisplay.RESP
+	c.SetAttrib TrialDisplay.Name & ".CRESP", TrialDisplay.CRESP
+	
+	
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - FeedBack BEGIN
+	'''''''''''''''''''''''''''''''''''''''''''''
+	dim AnswerIsRight as boolean
+AnswerIsRight=false
+
+dim CurTrialDur as long
+
+if TrialDisplay.RTTime>0 then
+	CurTrialDur=TrialDisplay.RTTime-TrialDisplay.OnsetTime
+else
+	CurTrialDur=TrialDuration
+end if
+
+select case TrialDisplay.resp
+	case fstBtn
+		if c.getattrib("w1")=c.getattrib("TargetColor") then
+			DrawCheck Display.XRes*.14, Display.YRes*.66, checkColor, checkWidth, backColor, cnvs
+			'TrialDisplay.ACC=1
+			AnswerIsRight=true
+			sleep checkTime
+			CurTrialDur=CurTrialDur+checkTime
+			TrialDisplay.CRESP=fstBtn
+		else
+			DrawX Display.XRes*.09, Display.YRes*.62, Display.XRes*.10, Display.YRes*.16, xColor, xWidth, backColor, cnvs
+			'TrialDisplay.ACC=0
+			AnswerIsRight=false
+			sleep xTime
+			CurTrialDur=CurTrialDur+xTime
+		end if
+	case sndBtn
+		if c.getattrib("w2")=c.getattrib("TargetColor") then
+			DrawCheck Display.XRes*.38, Display.YRes*.66, checkcolor, checkWidth, backColor, cnvs
+			'TrialDisplay.ACC=1
+			AnswerIsRight=true
+			sleep checkTime
+			CurTrialDur=CurTrialDur+checkTime
+			TrialDisplay.CRESP=sndBtn
+		else
+			DrawX Display.XRes*.33, Display.YRes*.62, Display.XRes*.10, Display.YRes*.16, xColor, xWidth, backColor, cnvs
+			'TrialDisplay.ACC=0
+			AnswerIsRight=false
+			sleep xTime
+			CurTrialDur=CurTrialDur+xTime
+		end if
+	case thdBtn
+		if c.getattrib("w3")=c.getattrib("TargetColor") then	
+			DrawCheck Display.XRes*.62, Display.YRes*.66, checkColor, checkWidth, backColor, cnvs
+			'TrialDisplay.ACC=1
+			AnswerIsRight=true
+			sleep checkTime
+			CurTrialDur=CurTrialDur+checkTime
+			TrialDisplay.CRESP=thdBtn
+		else
+			DrawX Display.XRes*.57, Display.YRes*.62, Display.XRes*.10, Display.YRes*.16, xColor, xWidth, backColor, cnvs
+			'TrialDisplay.ACC=0
+			AnswerIsRight=false
+			sleep xTime
+			CurTrialDur=CurTrialDur+xTime
+		end if
+	case fthBtn
+		if c.getattrib("w4")=c.getattrib("TargetColor") then	
+			DrawCheck Display.XRes*.86, Display.YRes*.66, checkColor, checkWidth, backColor, cnvs
+			'TrialDisplay.ACC=1
+			AnswerIsRight=true
+			sleep checkTime
+			CurTrialDur=CurTrialDur+checkTime
+			TrialDisplay.CRESP=fthBtn	
+		else
+			DrawX Display.XRes*.81, Display.YRes*.62, Display.XRes*.10, Display.YRes*.16, xColor, xWidth, backColor, cnvs
+			'TrialDisplay.ACC=0
+			AnswerIsRight=false
+			sleep xTime
+			CurTrialDur=CurTrialDur+xTime		
+		end if
+	case else
+		cnvs.clear
+		'TrialDisplay.ACC=0
+		TrialDisplay.ActiveState = "State1"
+		TrialDisplay.draw
+		AnswerIsRight=false
+		sleep noRespTime
+		CurTrialDur=CurTrialDur+noRespTime
+		TrialDisplay.ActiveState = "default"
+end select
+
+if IsIncon=true then
+	TotalInconTrials=TotalInconTrials+1
+	if AnswerIsRight then 
+		TotalInconAcc=TotalInconAcc+1
+	end if
+end if
+ 
+if AnswerIsRight then
+	if IsIncon and TrialDuration-titration>=1000 and TrialNo>2 then
+		TrialDuration=TrialDuration-titration
+	end if	
+	TrialDisplay.ACC=1	
+else
+	if IsIncon and TrialDuration+titration<=5000 and TrialNo>2 then
+		TrialDuration=TrialDuration+titration
+	end if
+	TrialDisplay.ACC=0
+end if
+
+
+if TrialDisplay.ACC=0 and TrialDisplay.RESP<>"" then
+	select case c.getattrib("TargetColor")
+		case c.getattrib("w1")
+			DrawCheck Display.XRes*.14, Display.YRes*.66, checkColor, checkWidth, backColor, cnvs
+		case c.getattrib("w2")
+			DrawCheck Display.XRes*.38, Display.YRes*.66, checkcolor, checkWidth, backColor, cnvs
+		case c.getattrib("w3")
+			DrawCheck Display.XRes*.62, Display.YRes*.66, checkColor, checkWidth, backColor, cnvs
+		case c.getattrib("w4")
+			DrawCheck Display.XRes*.86, Display.YRes*.66, checkColor, checkWidth, backColor, cnvs
+	end select
+
+	sleep checkAfterXTime
+	CurTrialDur=CurTrialDur+checkAfterXTime
+end if
+
+if IsIncon=false and TrialDisplay.RTTime>0 then
+	sleep TrialDuration+checkTime-CurTrialDur
+	CurTrialDur=TrialDuration+checkTime
+end if
+
+if (IsIncon=false and TrialNo=PreInconNoTrials) or _
+	(IsIncon=true and blocktime-(TrialDisplay.OnsetTime+CurTrialDur-blockstarttime)<=TrialDuration+checkTime) then
+	DrawCross fixationR, fixationWid, cnvs
+	sleep blocktime-(TrialDisplay.OnsetTime+CurTrialDur-blockstarttime)-20
+	c.setattrib "BlockTrialsLen", TrialDisplay.OnsetTime+CurTrialDur-blockstarttime-BkBgFxDu
+	c.setattrib "BlockCrossLen", blocktime-(TrialDisplay.OnsetTime+CurTrialDur-blockstarttime)
+	if IsIncon then
+		PreInconNoTrials=TrialNo
+		InconList.Terminate
+	else
+		ConList.Terminate
+	end if
+end if
+
+
+if IsIncon and TrialNo=2 and TrialDisplay.RESP<>"" and TrialDisplay.ACC=1 then
+	TrialDuration=TrialDisplay.RT
+end if
+
+TrialNo=TrialNo+1
+
+If GetUserBreakState <> 0 Then
+	if IsIncon then
+		InconList.Terminate
+		BlockList.Terminate
+	else
+		ConList.Terminate
+		BlockList.Terminate
+	end if
+end if
+	'''''''''''''''''''''''''''''''''''''''''''''
+	' InLine - FeedBack END
+	'''''''''''''''''''''''''''''''''''''''''''''
+	
+	c.SetAttrib TrialDisplay.Name & ".OnsetDelay", TrialDisplay.OnsetDelay
+	c.SetAttrib TrialDisplay.Name & ".OnsetTime", TrialDisplay.OnsetTime
+	c.SetAttrib TrialDisplay.Name & ".DurationError", TrialDisplay.DurationError
+	c.SetAttrib TrialDisplay.Name & ".RTTime", TrialDisplay.RTTime
+	c.SetAttrib TrialDisplay.Name & ".ACC", TrialDisplay.ACC
+	c.SetAttrib TrialDisplay.Name & ".RT", TrialDisplay.RT
+	c.SetAttrib TrialDisplay.Name & ".RESP", TrialDisplay.RESP
+	c.SetAttrib TrialDisplay.Name & ".CRESP", TrialDisplay.CRESP
+	
+
+	c.Log
+End Sub
+
+
+
+
+
+'--------------------------------------------------------------------------
+' InitDevices
+'
+'--------------------------------------------------------------------------
+Sub InitDevices(c As Context)
+
+
+
+	SetOSThreadPriority 3
+
+
+	Set Display = New DisplayDevice
+	Display.Name = "Display"
+
+	Dim DisplayDisplayDeviceInfo As DisplayDeviceInfo
+	DisplayDisplayDeviceInfo.XRes = 1024
+	DisplayDisplayDeviceInfo.YRes = 768
+	DisplayDisplayDeviceInfo.ColorDepth = 16
+	DisplayDisplayDeviceInfo.RefreshRate = 0
+	DisplayDisplayDeviceInfo.NumPages = 0
+	
+	'Load values from context if they exist
+	If c.AttribExists(Display.Name & ".XRes") Then DisplayDisplayDeviceInfo.XRes = CLng(c.GetAttrib(Display.Name & ".XRes"))
+	If c.AttribExists(Display.Name & ".YRes") Then DisplayDisplayDeviceInfo.YRes = CLng(c.GetAttrib(Display.Name & ".YRes"))
+	If c.AttribExists(Display.Name & ".ColorDepth") Then DisplayDisplayDeviceInfo.ColorDepth = CLng(c.GetAttrib(Display.Name & ".ColorDepth"))
+
+	'Open the device, unless the context values indicate otherwise
+	Dim DisplayOpen As Boolean
+	DisplayOpen = True
+	If c.AttribExists(Display.Name & ".Open") Then DisplayOpen = CLogical(c.GetAttrib(Display.Name & ".Open"))
+	If DisplayOpen = True Then
+		Display.Open DisplayDisplayDeviceInfo
+		c.SetAttrib Display.Name & ".RefreshRate", Format$(Display.CalculatedRefreshRate, "0.000")
+	End If
+
+	Set Sound = New SoundDevice
+	Sound.Name = "Sound"
+
+	Dim SoundSoundOutDeviceInfo As SoundDeviceInfo
+	SoundSoundOutDeviceInfo.Channels = 2
+	SoundSoundOutDeviceInfo.SamplesPerSecond = 22050
+	SoundSoundOutDeviceInfo.BitsPerSample = 16
+	'Load values from context if they exist
+	If c.AttribExists(Sound.Name & ".Channels") Then SoundSoundOutDeviceInfo.Channels = CLng(c.GetAttrib(Sound.Name & ".Channels"))
+	If c.AttribExists(Sound.Name & ".SamplesPerSecond") Then SoundSoundOutDeviceInfo.SamplesPerSecond = CLng(c.GetAttrib(Sound.Name & ".SamplesPerSecond"))
+	If c.AttribExists(Sound.Name & ".BitsPerSample") Then SoundSoundOutDeviceInfo.BitsPerSample = CLng(c.GetAttrib(Sound.Name & ".BitsPerSample"))
+
+	Set Keyboard = New KeyboardDevice
+	Keyboard.Name = "Keyboard"
+
+	Dim KeyboardKeyboardDeviceInfo as KeyboardDeviceInfo
+	KeyboardKeyboardDeviceInfo.CollectionMode = ebPressesOnly
+	KeyboardKeyboardDeviceInfo.CapsLock = ebCapsLockOff
+	KeyboardKeyboardDeviceInfo.NumLock = ebNumLockOn
+	'Load values from context if they exist
+	If c.AttribExists(Keyboard.Name & ".CollectionMode") Then KeyboardKeyboardDeviceInfo.CollectionMode = CLng(c.GetAttrib(Keyboard.Name & ".CollectionMode"))
+	If c.AttribExists(Keyboard.Name & ".CapsLock") Then KeyboardKeyboardDeviceInfo.CapsLock = CLng(c.GetAttrib(Keyboard.Name & ".CapsLock"))
+	If c.AttribExists(Keyboard.Name & ".NumLock") Then KeyboardKeyboardDeviceInfo.NumLock = CLng(c.GetAttrib(Keyboard.Name & ".NumLock"))
+	If c.AttribExists(Keyboard.Name & ".EmulateDeviceName") Then KeyboardKeyboardDeviceInfo.EmulateDeviceName = c.GetAttrib(Keyboard.Name & ".EmulateDeviceName")
+
+	'Open the device, unless the context values indicate otherwise
+	Dim KeyboardOpen As Boolean
+	KeyboardOpen = True
+	If c.AttribExists(Keyboard.Name & ".Open") Then KeyboardOpen = CLogical(c.GetAttrib(Keyboard.Name & ".Open"))
+	If KeyboardOpen = True Then
+		Keyboard.Open KeyboardKeyboardDeviceInfo
+	End If
+
+	Set Mouse = New MouseDevice
+	Mouse.Name = "Mouse"
+
+	Dim MouseMouseDeviceInfo as MouseDeviceInfo
+	MouseMouseDeviceInfo.OpenMode = ebMouseOpenModeDirect
+	MouseMouseDeviceInfo.CollectionMode = ebPressesOnly
+	MouseMouseDeviceInfo.ShowCursor = False
+	'Load values from context if they exist
+	If c.AttribExists(Mouse.Name & ".OpenMode") Then MouseMouseDeviceInfo.OpenMode = CLng(c.GetAttrib(Mouse.Name & ".OpenMode"))
+	If c.AttribExists(Mouse.Name & ".CollectionMode") Then MouseMouseDeviceInfo.CollectionMode = CLng(c.GetAttrib(Mouse.Name & ".CollectionMode"))
+	If c.AttribExists(Mouse.Name & ".ShowCursor") Then MouseMouseDeviceInfo.ShowCursor = CLogical(c.GetAttrib(Mouse.Name & ".ShowCursor"))
+	If c.AttribExists(Mouse.Name & ".EmulateDeviceName") Then MouseMouseDeviceInfo.EmulateDeviceName = c.GetAttrib(Mouse.Name & ".EmulateDeviceName")
+
+	'Open the device, unless the context values indicate otherwise
+	Dim MouseOpen As Boolean
+	MouseOpen = True
+	If c.AttribExists(Mouse.Name & ".Open") Then MouseOpen = CLogical(c.GetAttrib(Mouse.Name & ".Open"))
+	If MouseOpen = True Then
+		Mouse.Open MouseMouseDeviceInfo
+	End If
+
+	Set SRBOX = New SRBoxDevice
+	SRBOX.Name = "SRBOX"
+
+	Dim SRBOXSRBoxDeviceInfo As SRBoxDeviceInfo
+	SRBOXSRBoxDeviceInfo.Model = 200
+	SRBOXSRBoxDeviceInfo.Revision = 1
+	SRBOXSRBoxDeviceInfo.CommPort = 1
+	SRBOXSRBoxDeviceInfo.BaudRate = 19200
+	SRBOXSRBoxDeviceInfo.CharacterRate = 800
+	SRBOXSRBoxDeviceInfo.Configuration = ebSRBoxConfigBRUUnique
+	SRBOXSRBoxDeviceInfo.CollectionMode = ebPressesOnly
+	SRBOXSRBoxDeviceInfo.EmulateDeviceName = "Keyboard"
+	'Load values from context if they exist
+	If c.AttribExists(SRBOX.Name & ".CommPort") Then SRBOXSRBoxDeviceInfo.CommPort = CLng(c.GetAttrib(SRBOX.Name & ".CommPort"))
+	If c.AttribExists(SRBOX.Name & ".BaudRate") Then SRBOXSRBoxDeviceInfo.BaudRate = CLng(c.GetAttrib(SRBOX.Name & ".BaudRate"))
+	If c.AttribExists(SRBOX.Name & ".CharacterRate") Then SRBOXSRBoxDeviceInfo.CharacterRate = CLng(c.GetAttrib(SRBOX.Name & ".CharacterRate"))
+	If c.AttribExists(SRBOX.Name & ".Configuration") Then SRBOXSRBoxDeviceInfo.Configuration = CLng(c.GetAttrib(SRBOX.Name & ".Configuration"))
+	If c.AttribExists(SRBOX.Name & ".CollectionMode") Then SRBOXSRBoxDeviceInfo.CollectionMode = CLng(c.GetAttrib(SRBOX.Name & ".CollectionMode"))
+	If c.AttribExists(SRBOX.Name & ".EmulateDeviceName") Then SRBOXSRBoxDeviceInfo.EmulateDeviceName = c.GetAttrib(SRBOX.Name & ".EmulateDeviceName")
+	
+	'Open the device, unless the context values indicate otherwise
+	Dim SRBOXOpen As Boolean
+	SRBOXOpen = True
+	If c.AttribExists(SRBOX.Name & ".Open") Then SRBOXOpen = CLogical(c.GetAttrib(SRBOX.Name & ".Open"))
+	If SRBOXOpen = True Then
+		SRBOX.Open SRBOXSRBoxDeviceInfo
+	End If
+
+
+	SetOSThreadPriority 0
+
+End Sub
+
+
+
+'--------------------------------------------------------------------------
+' InitObjects
+'
+'--------------------------------------------------------------------------
+Sub InitObjects(c As Context)
+
+	Set SessionProc = New Procedure
+	SessionProc.Name = "SessionProc"
+	SessionProc.Tag = ""
+	SessionProc.Subroutine = "SessionProc_Run"
+
+	Set InconList = New List
+	InconList.Name = "InconList"
+	InconList.Tag = ""
+
+	'Initialization for InconList
+	
+	Set InconList.Order = New RandomOrder
+	Set InconList.Deletion = NoDeletion
+	InconList.ResetEveryRun = True
+
+	' Create the column headings
+	InconList.AddAttrib "Target"
+	InconList.AddAttrib "TargetColor"
+	InconList.AddAttrib "w1"
+	InconList.AddAttrib "w1color"
+	InconList.AddAttrib "w2"
+	InconList.AddAttrib "w2color"
+	InconList.AddAttrib "w3"
+	InconList.AddAttrib "w3color"
+	InconList.AddAttrib "w4"
+	InconList.AddAttrib "w4color"
+	InconList.AddAttrib "Position"
+	InconList.Filename = ""
+	InconList.LoadMethod = ebLoadMethodEmbedded
+
+	InconList.Load
+
+	Set InconList.TerminateCondition = Cycles(1)
+	Set InconList.ResetCondition = Samples(36)
+	InconList.Reset
+	
+	Set InconTrialProc = New Procedure
+	InconTrialProc.Name = "InconTrialProc"
+	InconTrialProc.Tag = ""
+	InconTrialProc.Subroutine = "InconTrialProc_Run"
+
+	Set Fixation = New TextDisplay
+	Fixation.Name = "Fixation"
+	Fixation.Tag = ""
+
+	InitTextDisplayDefaults Fixation
+
+	Fixation.Text = ""
+	Fixation.BackStyle = "transparent"
+	Fixation.BackColor = CColor("black")
+	Fixation.ForeColor = CColor("white")
+	Fixation.FontSize = "200"
+	Fixation.FontBold = CLogical("No")
+	Fixation.Duration = CLng("-1")
+	Fixation.TimingMode = ebTimingModeEvent
+	Fixation.PreRelease = Val("0")
+
+	Fixation.OnsetSync = 1
+	Fixation.OffsetSync = 0
+
+	Set ThankYou = New TextDisplay
+	ThankYou.Name = "ThankYou"
+	ThankYou.Tag = ""
+
+	InitTextDisplayDefaults ThankYou
+
+	ThankYou.Text = "THANK YOU!"
+	ThankYou.BackColor = CColor("black")
+	ThankYou.ForeColor = CColor("white")
+	ThankYou.FontName = "Arial"
+	ThankYou.FontSize = "50"
+	ThankYou.Duration = CLng("5000")
+	ThankYou.TimingMode = ebTimingModeEvent
+	ThankYou.PreRelease = Val("0")
+
+	ThankYou.OnsetSync = 1
+	ThankYou.OffsetSync = 0
+
+	Set BlockList = New List
+	BlockList.Name = "BlockList"
+	BlockList.Tag = ""
+
+	'Initialization for BlockList
+	
+	Set BlockList.Order = New SequentialOrder
+	Set BlockList.Deletion = NoDeletion
+	BlockList.ResetEveryRun = False
+
+	' Create the column headings
+	BlockList.Filename = ""
+	BlockList.LoadMethod = ebLoadMethodEmbedded
+
+	BlockList.Load
+
+	Set BlockList.TerminateCondition = Cycles(1)
+	Set BlockList.ResetCondition = Samples(8)
+	BlockList.Reset
+	
+	Set InconProc = New Procedure
+	InconProc.Name = "InconProc"
+	InconProc.Tag = ""
+	InconProc.Subroutine = "InconProc_Run"
+
+	Set ConProc = New Procedure
+	ConProc.Name = "ConProc"
+	ConProc.Tag = ""
+	ConProc.Subroutine = "ConProc_Run"
+
+	Set ConList = New List
+	ConList.Name = "ConList"
+	ConList.Tag = ""
+
+	'Initialization for ConList
+	
+	Set ConList.Order = New RandomOrder
+	Set ConList.Deletion = NoDeletion
+	ConList.ResetEveryRun = True
+
+	' Create the column headings
+	ConList.AddAttrib "Target"
+	ConList.AddAttrib "TargetColor"
+	ConList.AddAttrib "w1"
+	ConList.AddAttrib "w1color"
+	ConList.AddAttrib "w2"
+	ConList.AddAttrib "w2color"
+	ConList.AddAttrib "w3"
+	ConList.AddAttrib "w3color"
+	ConList.AddAttrib "w4"
+	ConList.AddAttrib "w4color"
+	ConList.AddAttrib "Position"
+	ConList.Filename = ""
+	ConList.LoadMethod = ebLoadMethodEmbedded
+
+	ConList.Load
+
+	Set ConList.TerminateCondition = Cycles(1)
+	Set ConList.ResetCondition = Samples(32)
+	ConList.Reset
+	
+	Set ConTrialProc = New Procedure
+	ConTrialProc.Name = "ConTrialProc"
+	ConTrialProc.Tag = ""
+	ConTrialProc.Subroutine = "ConTrialProc_Run"
+
+	Set TrialDisplay = New Slide
+	TrialDisplay.Name = "TrialDisplay"
+	TrialDisplay.Tag = ""
+
+	Set TrialDisplayEchoClients = New EchoClientCollection
+	TrialDisplay.Duration = CLng("1000")
+	TrialDisplay.TimingMode = ebTimingModeEvent
+	TrialDisplay.PreRelease = Val("0")
+
+	TrialDisplay.OnsetSync = 1
+	TrialDisplay.OffsetSync = 0
+
+	Set TrialDisplay_State = New SlideState
+	TrialDisplay_State.Name = "Default"
+
+	InitSlideStateDefaults TrialDisplay_State
+
+	TrialDisplay_State.BackColor = CColor("black")
+
+	TrialDisplay.States.Add TrialDisplay_State, "Default"
+
+
+	Set TrialDisplay_SlideText = New SlideText
+	TrialDisplay_SlideText.Name = "txtw4"
+
+	InitSlideTextDefaults TrialDisplay_SlideText
+
+	TrialDisplay_SlideText.Text = ""
+	TrialDisplay_SlideText.X = "86%"
+	TrialDisplay_SlideText.Y = "70%"
+	TrialDisplay_SlideText.Width = "20%"
+	TrialDisplay_SlideText.Height = "12%"
+	TrialDisplay_SlideText.ForeColor = CColor("white")
+	TrialDisplay_SlideText.BackColor = CColor("black")
+	TrialDisplay_SlideText.FontName = "Arial"
+	TrialDisplay_SlideText.FontSize = "50"
+	TrialDisplay.States.Item("Default").Objects.Add TrialDisplay_SlideText, "txtw4"
+
+	Set TrialDisplay_SlideText = New SlideText
+	TrialDisplay_SlideText.Name = "txtw3"
+
+	InitSlideTextDefaults TrialDisplay_SlideText
+
+	TrialDisplay_SlideText.Text = ""
+	TrialDisplay_SlideText.X = "62%"
+	TrialDisplay_SlideText.Y = "70%"
+	TrialDisplay_SlideText.Width = "20%"
+	TrialDisplay_SlideText.Height = "12%"
+	TrialDisplay_SlideText.ForeColor = CColor("white")
+	TrialDisplay_SlideText.BackColor = CColor("black")
+	TrialDisplay_SlideText.FontName = "Arial"
+	TrialDisplay_SlideText.FontSize = "50"
+	TrialDisplay.States.Item("Default").Objects.Add TrialDisplay_SlideText, "txtw3"
+
+	Set TrialDisplay_SlideText = New SlideText
+	TrialDisplay_SlideText.Name = "txtw2"
+
+	InitSlideTextDefaults TrialDisplay_SlideText
+
+	TrialDisplay_SlideText.Text = ""
+	TrialDisplay_SlideText.X = "38%"
+	TrialDisplay_SlideText.Y = "70%"
+	TrialDisplay_SlideText.Width = "20%"
+	TrialDisplay_SlideText.Height = "12%"
+	TrialDisplay_SlideText.ForeColor = CColor("white")
+	TrialDisplay_SlideText.BackColor = CColor("black")
+	TrialDisplay_SlideText.FontName = "Arial"
+	TrialDisplay_SlideText.FontSize = "50"
+	TrialDisplay.States.Item("Default").Objects.Add TrialDisplay_SlideText, "txtw2"
+
+	Set TrialDisplay_SlideText = New SlideText
+	TrialDisplay_SlideText.Name = "txtw1"
+
+	InitSlideTextDefaults TrialDisplay_SlideText
+
+	TrialDisplay_SlideText.Text = ""
+	TrialDisplay_SlideText.X = "14%"
+	TrialDisplay_SlideText.Y = "70%"
+	TrialDisplay_SlideText.Width = "20%"
+	TrialDisplay_SlideText.Height = "12%"
+	TrialDisplay_SlideText.ForeColor = CColor("white")
+	TrialDisplay_SlideText.BackColor = CColor("black")
+	TrialDisplay_SlideText.FontName = "Arial"
+	TrialDisplay_SlideText.FontSize = "50"
+	TrialDisplay.States.Item("Default").Objects.Add TrialDisplay_SlideText, "txtw1"
+
+	Set TrialDisplay_SlideText = New SlideText
+	TrialDisplay_SlideText.Name = "txtTarget"
+
+	InitSlideTextDefaults TrialDisplay_SlideText
+
+	TrialDisplay_SlideText.Text = ""
+	TrialDisplay_SlideText.Y = "35%"
+	TrialDisplay_SlideText.Width = "40%"
+	TrialDisplay_SlideText.Height = "15%"
+	TrialDisplay_SlideText.ForeColor = CColor("white")
+	TrialDisplay_SlideText.BackColor = CColor("black")
+	TrialDisplay_SlideText.FontName = "Arial"
+	TrialDisplay_SlideText.FontSize = "60"
+	TrialDisplay.States.Item("Default").Objects.Add TrialDisplay_SlideText, "txtTarget"
+
+	Set TrialDisplay_State = New SlideState
+	TrialDisplay_State.Name = "State1"
+
+	InitSlideStateDefaults TrialDisplay_State
+
+	TrialDisplay_State.BackColor = CColor("black")
+	TrialDisplay_State.ClearAfter = CLogical("Yes")
+
+	TrialDisplay.States.Add TrialDisplay_State, "State1"
+
+
+	Set TrialDisplay_SlideText = New SlideText
+	TrialDisplay_SlideText.Name = "txtTooLate"
+
+	InitSlideTextDefaults TrialDisplay_SlideText
+
+	TrialDisplay_SlideText.Text = "TOO LATE!"
+	TrialDisplay_SlideText.Width = "56%"
+	TrialDisplay_SlideText.Height = "15%"
+	TrialDisplay_SlideText.ForeColor = CColor("white")
+	TrialDisplay_SlideText.BackColor = CColor("black")
+	TrialDisplay_SlideText.FontName = "Arial"
+	TrialDisplay_SlideText.FontSize = "50"
+	TrialDisplay.States.Item("State1").Objects.Add TrialDisplay_SlideText, "txtTooLate"
+	TrialDisplay.ActiveState = "Default"
+
+	Set Instr = New TextDisplay
+	Instr.Name = "Instr"
+	Instr.Tag = ""
+
+	Set InstrEchoClients = New EchoClientCollection
+
+	InitTextDisplayDefaults Instr
+
+	Instr.Text = "instructions:\n\n\npress \"space\" to start"
+	Instr.BackColor = CColor("black")
+	Instr.ForeColor = CColor("white")
+	Instr.FontName = "Arial"
+	Instr.FontSize = "30"
+	Instr.Duration = CLng("-1")
+	Instr.TimingMode = ebTimingModeEvent
+	Instr.PreRelease = Val("0")
+
+	Instr.OnsetSync = 1
+	Instr.OffsetSync = 0
+
+	Set WaitForScanner = New TextDisplay
+	WaitForScanner.Name = "WaitForScanner"
+	WaitForScanner.Tag = ""
+
+	Set WaitForScannerEchoClients = New EchoClientCollection
+
+	InitTextDisplayDefaults WaitForScanner
+
+	WaitForScanner.Text = "waiting for scanner ..."
+	WaitForScanner.BackColor = CColor("black")
+	WaitForScanner.ForeColor = CColor("white")
+	WaitForScanner.FontName = "Arial"
+	WaitForScanner.FontSize = "30"
+	WaitForScanner.Duration = CLng("-1")
+	WaitForScanner.TimingMode = ebTimingModeEvent
+	WaitForScanner.PreRelease = Val("0")
+
+	WaitForScanner.OnsetSync = 1
+	WaitForScanner.OffsetSync = 0
+
+
+End Sub
+
+
+'--------------------------------------------------------------------------
+' InitPackages
+'
+'--------------------------------------------------------------------------
+Sub InitPackages(c As Context)
+
+End Sub
+
+
+
+'--------------------------------------------------------------------------
+' InitGlobals
+'
+'--------------------------------------------------------------------------
+Sub InitGlobals(c As Context)
+
+End Sub
+
+
+
+'--------------------------------------------------------------------------
+
+
+'--------------------------------------------------------------------------
+'--------------------------------------------------------------------------
+' UnInitGlobals
+'--------------------------------------------------------------------------
+Sub UnInitGlobals()
+End Sub
+'--------------------------------------------------------------------------
+' UnInitDevices
+'--------------------------------------------------------------------------
+Sub UnInitDevices()
+	Display.Close
+	Set Display = Nothing
+
+	Keyboard.Close
+	Set Keyboard = Nothing
+
+	Mouse.Close
+	Set Mouse = Nothing
+
+
+	SRBOX.Close
+	Set SRBOX = Nothing
+
+End Sub
+
+
+'--------------------------------------------------------------------------
+'--------------------------------------------------------------------------
+' UnInitPackages
+'--------------------------------------------------------------------------
+Sub UnInitPackages()
+End Sub
+
+
+'--------------------------------------------------------------------------
+' UnInitObjects
+'
+'--------------------------------------------------------------------------
+Sub UnInitObjects()
+
+	Set SessionProc = Nothing
+
+	Set InconList = Nothing
+
+	Set InconTrialProc = Nothing
+
+	Set Fixation = Nothing
+
+	Set ThankYou = Nothing
+
+	Set BlockList = Nothing
+
+	Set InconProc = Nothing
+
+	Set ConProc = Nothing
+
+	Set ConList = Nothing
+
+	Set ConTrialProc = Nothing
+
+	Set TrialDisplay = Nothing
+
+	Set TrialDisplayEchoClients = Nothing
+
+	Set Instr = Nothing
+
+	Set InstrEchoClients = Nothing
+
+	Set WaitForScanner = Nothing
+
+	Set WaitForScannerEchoClients = Nothing
+
+
+End Sub
+
+
+'--------------------------------------------------------------------------
+' Main
+'
+'--------------------------------------------------------------------------
+Sub Main()
+
+	' Create and initialize the default context, data file,
+	' and provide global access to the context.
+	Dim c As Context
+	Set c = New Context
+	Set c.DataFile = New DataFile
+	c.PushNewFrame
+	Set ebContext = c
+
+	' Set the log level names
+	c.SetLogLevelName 1, "Session"
+	c.SetLogLevelName 2, "Block"
+	c.SetLogLevelName 3, "Trial"
+	c.SetLogLevelName 4, "SubTrial"
+	c.SetLogLevelName 5, "LogLevel5"
+	c.SetLogLevelName 6, "LogLevel6"
+	c.SetLogLevelName 7, "LogLevel7"
+	c.SetLogLevelName 8, "LogLevel8"
+	c.SetLogLevelName 9, "LogLevel9"
+	c.SetLogLevelName 10, "LogLevel10"
+
+	' Set standard logging items
+	ebContext.SetAttrib "Experiment", "StroopColor_Scanner_New"
+	ebContext.SetAttrib "SessionDate", Date$
+	ebContext.SetAttrib "SessionTime", Time$
+
+	'Initialize global variables for packages
+	InitGlobals c
+
+	CreateDefaultPort
+
+	If Basic.OS = ebWin32 Then
+		WinActivate "E-Run Experiment Window"
+	End If
+
+	' Get the StartupInfo
+
+	' Set the defaults for all of the StartupInfo
+	If Not c.AttribExists("Subject") Then c.SetAttrib "Subject", "1"
+	If Not c.AttribExists("Session") Then c.SetAttrib "Session", "1"
+
+	' Determine if StartupInfo.UseDefaults exists and is True/False to override prompts for StartupInfo parameters
+	Dim bStartupInfoUseDefaults As Boolean
+	bStartupInfoUseDefaults = False
+	If c.AttribExists("StartupInfo.UseDefaults") Then bStartupInfoUseDefaults = CLogical(c.GetAttrib("StartupInfo.UseDefaults"))
+	If Not bStartupInfoUseDefaults Then
+
+		Dim vAnswer As Variant
+StartupInfo_Begin:
+
+StartupInfoPrompt_Subject:
+		vAnswer = AskBox("Please enter the Subject Number (1-32767, 0=No Data Logging):", c.GetAttrib("Subject"))
+		If Not IsEmpty(vAnswer) then
+			If Not IsNumeric(vAnswer) then
+				MsgBox "Please enter an integer value"
+				GoTo StartupInfoPrompt_Subject
+			ElseIf CLng(vAnswer) < 0 Then
+				MsgBox "The value for Subject must not be less than 0"
+				GoTo StartupInfoPrompt_Subject
+			ElseIf CLng(vAnswer) > 32767 Then
+				MsgBox "The value for Subject must be not be greater than 32767"
+				GoTo StartupInfoPrompt_Subject
+			End If
+		Else
+			GoTo ExperimentAbort
+		End if
+
+		c.SetAttrib "Subject", CStr(vAnswer)
+
+StartupInfoPrompt_Session:
+		vAnswer = AskBox("Please enter the Session Number (1-32767):", c.GetAttrib("Session"))
+		If Not IsEmpty(vAnswer) then
+			If Not IsNumeric(vAnswer) then
+				MsgBox "Please enter an integer value"
+				GoTo StartupInfoPrompt_Session
+			ElseIf CLng(vAnswer) < 1 Then
+				MsgBox "The value for Session must not be less than 1"
+				GoTo StartupInfoPrompt_Session
+			ElseIf CLng(vAnswer) > 32767 Then
+				MsgBox "The value for Session must be not be greater than 32767"
+				GoTo StartupInfoPrompt_Session
+			End If
+		Else
+			GoTo ExperimentAbort
+		End if
+
+		c.SetAttrib "Session", CStr(vAnswer)
+
+		' Display the summary
+		Dim strSummary As String
+		strSummary = "Subject:    " & c.GetAttrib("Subject") & "\n"
+		strSummary = strSummary & "Session:    " & c.GetAttrib("Session") & "\n"
+		strSummary = strSummary & "\nContinue with the above startup info?"
+
+		Dim nSummaryAnswer As Integer
+		nSummaryAnswer = MsgBox(strSummary, ebYesNoCancel + ebQuestion, "Summary of Startup Info")
+		If nSummaryAnswer = ebNo Then
+				GoTo StartupInfo_Begin
+		ElseIf nSummaryAnswer = ebCancel Then
+				GoTo ExperimentAbort
+		End If
+
+	End If
+
+
+	'If the attribute Clock.Scale.Override exists
+	'  then use it for to set the Clock.Scale value
+	If c.AttribExists("Clock.Scale.Override") Then
+		Clock.Scale = CDbl(c.GetAttrib("Clock.Scale.Override"))
+	End If
+
+	' Set the Filenames for the data files
+	Dim strFilenameRecovery As String
+	Dim strFilenameEDAT As String
+
+	'If the attribute DataFile.Filename.Override exists
+	'  then use it for the .txt and .edat filenames
+	If c.AttribExists("DataFile.Filename.Override") Then
+
+		' Set the default Data Filename
+		strFilenameRecovery = CStr(c.GetAttrib("DataFile.Filename.Override")) & ".txt"
+		strFilenameEDAT = CStr(c.GetAttrib("DataFile.Filename.Override")) & ".edat"
+
+	Else
+
+		' Set the default Data Filename
+		strFilenameRecovery = CStr(c.GetAttrib("Experiment")) & "-" & CStr(c.GetAttrib("Subject")) & "-" & CStr(c.GetAttrib("Session")) & ".txt"
+		strFilenameEDAT = CStr(c.GetAttrib("Experiment")) & "-" & CStr(c.GetAttrib("Subject")) & "-" & CStr(c.GetAttrib("Session")) & ".edat"
+
+	End If
+
+	'Set the name of the data file
+	c.DataFile.Filename = strFilenameRecovery
+
+	' If we are logging data, then prompt to overwrite the data file if it exists
+	If CLng(c.GetAttrib("Subject")) <> 0 Then
+		If FileExists(c.DataFile.Filename) Or FileExists(strFilenameEDAT) Then
+			If ebYes <> MsgBox("WARNING: The data file and/or recovery file already exists:\nFILE: " & c.DataFile.Filename & "\n\nDo you want to overwrite?", ebYesNo + ebQuestion) Then
+				GoTo ExperimentAbort
+			End If
+		End If
+	End If
+
+	' Set defaults for RandomSeed and GroupNumber if StartupInfo did not assign their values
+	If Not c.AttribExists("RandomSeed") Then c.SetAttrib "RandomSeed", PRNG.GetSeed()
+	If Not c.AttribExists("Group") Then c.SetAttrib "Group", "1"
+
+	'Set the random seed
+	Randomize CLng(c.GetAttrib("RandomSeed"))
+
+	' Initialize all system devices, packages, and objects
+	InitDevices c
+	InitPackages c
+	InitObjects c
+
+	' If we are logging data, then open the datafile
+	If CLng(c.GetAttrib("Subject")) <> 0 Then
+		c.DataFile.Open
+		c.LogHeader
+	End If
+
+
+
+#If RUNTIME_VERSION_MAJOR > 1  Or (RUNTIME_VERSION_MAJOR = 1 And RUNTIME_VERSION_MINOR >= 2) Then
+	' Log clock timing information
+	c.SetAttrib "Clock.Information", Clock.Information
+#End If
+
+	' Start the running of the Experiment
+	SessionProc.Run c
+
+	' Clean up the context and close the datafile
+	If CLng(c.GetAttrib("Subject")) <> 0 Then
+		c.DataFile.Close
+		' Attempt to convert the recovery file into a data file
+		Dim nConvert As Long
+		nConvert = c.DataFile.Convert(ebProgressSimple)
+		If nConvert = 0 Then
+			' Settings in E-Studio are set to not remove E-Recovery file
+		Else
+			' The datafile failed to convert!
+			MsgBox "ERROR: The datafile did not convert!\nFILE: " & c.DataFile.Filename & "\n\nIt is recommended that you recover your data with the E-Recovery utility"
+			MsgBox c.DataFile.GetLastErrorMessage()
+		End If
+	End If
+ExperimentFinish:
+
+	UnInitObjects
+
+	UnInitPackages
+	UnInitDevices
+
+	UnInitGlobals
+
+ExperimentAbort:
+
+	' Clean up the context
+	c.PopFrame
+	Set c = Nothing
+	Set ebContext = Nothing
+
+	DestroyDefaultPort
+
+End Sub
+
+
+[DataSection_InconList(1)]
+Weight	Nested	Procedure	Target	TargetColor	w1	w1color	w2	w2color	w3	w3color	w4	w4color	Position
+1		InconTrialProc	1	2	1	3	3	4	2	1	4	2	3
+1		InconTrialProc	1	2	1	3	3	2	4	1	2	4	4
+1		InconTrialProc	1	2	3	1	4	2	2	3	1	4	3
+1		InconTrialProc	1	3	2	4	1	2	4	3	3	1	4
+1		InconTrialProc	1	3	1	3	3	2	4	1	2	4	2
+1		InconTrialProc	1	3	2	1	3	4	4	2	1	3	2
+1		InconTrialProc	1	4	3	3	1	4	4	1	2	2	3
+1		InconTrialProc	1	4	1	1	2	3	3	2	4	4	4
+1		InconTrialProc	1	4	2	4	1	3	4	1	3	2	3
+1		InconTrialProc	2	1	1	4	3	2	2	3	4	1	1
+1		InconTrialProc	2	1	1	4	2	2	4	1	3	3	1
+1		InconTrialProc	2	1	3	4	4	2	1	3	2	1	3
+1		InconTrialProc	2	3	2	3	4	1	1	2	3	4	4
+1		InconTrialProc	2	3	2	1	3	3	1	4	4	2	2
+1		InconTrialProc	2	3	2	2	3	4	4	3	1	1	2
+1		InconTrialProc	2	4	4	4	2	1	1	2	3	3	1
+1		InconTrialProc	2	4	1	1	3	2	4	4	2	3	3
+1		InconTrialProc	2	4	4	3	1	4	2	1	3	2	1
+1		InconTrialProc	3	1	4	3	3	4	2	1	1	2	4
+1		InconTrialProc	3	1	2	3	3	2	1	1	4	4	3
+1		InconTrialProc	3	1	3	1	2	4	1	2	4	3	3
+1		InconTrialProc	3	2	2	2	4	4	1	3	3	1	1
+1		InconTrialProc	3	2	1	2	4	4	3	3	2	1	4
+1		InconTrialProc	3	2	1	3	3	4	4	2	2	1	4
+1		InconTrialProc	3	4	1	4	3	2	4	3	2	1	3
+1		InconTrialProc	3	4	3	1	1	4	2	3	4	2	4
+1		InconTrialProc	3	4	4	2	1	4	3	3	2	1	1
+1		InconTrialProc	4	1	2	2	1	3	3	1	4	4	2
+1		InconTrialProc	4	1	1	4	2	3	3	1	4	2	1
+1		InconTrialProc	4	1	3	4	2	1	4	2	1	3	2
+1		InconTrialProc	4	2	4	2	2	1	3	4	1	3	2
+1		InconTrialProc	4	2	1	1	4	2	3	4	2	3	4
+1		InconTrialProc	4	2	2	4	4	1	3	2	1	3	1
+1		InconTrialProc	4	3	1	3	3	2	2	4	4	1	2
+1		InconTrialProc	4	3	3	2	2	4	4	1	1	3	1
+1		InconTrialProc	4	3	4	2	3	4	2	1	1	3	2\0
+
+[DataSection_BlockList(1)]
+Weight	Nested	Procedure
+1		InconProc
+1		ConProc
+1		InconProc
+1		ConProc
+1		InconProc
+1		ConProc
+1		InconProc
+1		ConProc\0
+
+[DataSection_ConList(1)]
+Weight	Nested	Procedure	Target	TargetColor	w1	w1color	w2	w2color	w3	w3color	w4	w4color	Position
+1		ConTrialProc	1	1	3	1	1	1	2	1	4	1	2
+1		ConTrialProc	1	1	2	1	1	1	3	1	4	1	2
+1		ConTrialProc	1	1	2	1	3	1	4	1	1	1	4
+1		ConTrialProc	1	1	1	1	3	1	4	1	2	1	1
+1		ConTrialProc	1	1	3	1	4	1	1	1	2	1	3
+1		ConTrialProc	1	1	4	1	2	1	3	1	1	1	4
+1		ConTrialProc	1	1	4	1	2	1	1	1	3	1	3
+1		ConTrialProc	1	1	1	1	4	1	2	1	3	1	1
+1		ConTrialProc	2	2	4	2	3	2	1	2	2	2	4
+1		ConTrialProc	2	2	1	2	3	2	2	2	4	2	3
+1		ConTrialProc	2	2	2	2	1	2	3	2	4	2	1
+1		ConTrialProc	2	2	2	2	4	2	1	2	3	2	1
+1		ConTrialProc	2	2	1	2	4	2	2	2	3	2	3
+1		ConTrialProc	2	2	3	2	1	2	4	2	2	2	4
+1		ConTrialProc	2	2	3	2	2	2	4	2	1	2	2
+1		ConTrialProc	2	2	4	2	2	2	3	2	1	2	2
+1		ConTrialProc	3	3	4	3	2	3	1	3	3	3	4
+1		ConTrialProc	3	3	2	3	4	3	1	3	3	3	4
+1		ConTrialProc	3	3	3	3	1	3	4	3	2	3	1
+1		ConTrialProc	3	3	4	3	3	3	2	3	1	3	2
+1		ConTrialProc	3	3	3	3	4	3	2	3	1	3	1
+1		ConTrialProc	3	3	1	3	3	3	4	3	2	3	2
+1		ConTrialProc	3	3	1	3	2	3	3	3	4	3	3
+1		ConTrialProc	3	3	2	3	1	3	3	3	4	3	3
+1		ConTrialProc	4	4	4	4	3	4	2	4	1	4	1
+1		ConTrialProc	4	4	3	4	4	4	2	4	1	4	2
+1		ConTrialProc	4	4	2	4	3	4	1	4	4	4	4
+1		ConTrialProc	4	4	2	4	1	4	3	4	4	4	4
+1		ConTrialProc	4	4	1	4	2	4	4	4	3	4	3
+1		ConTrialProc	4	4	4	4	2	4	1	4	3	4	1
+1		ConTrialProc	4	4	1	4	4	4	3	4	2	4	2
+1		ConTrialProc	4	4	3	4	1	4	4	4	2	4	3\0
