@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v3.0.0b12),
-    on Thu Mar  7 08:15:32 2019
+    on Thu Mar 14 00:25:50 2019
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -76,10 +76,10 @@ import numpy as np
 
 # set number of blocks in experiment (default = 4)
 # NOTE: one block = rest + incongruent + rest + congruent
-numBlocks = 2
+numBlocks = 4
 
 # set duration (sec) for incongruent/congruent blocks (default = 60, must be divisible by 10)
-blockLength = 30
+blockLength = 60
 
 # set duration (sec) for rest periods (default = 10, must be divisible by 10)
 # note this will be padded with a few varying seconds
