@@ -21,11 +21,11 @@
     <Param name="Show mouse" updates="None" val="False" valType="bool"/>
     <Param name="Units" updates="None" val="use prefs" valType="str"/>
     <Param name="Use version" updates="None" val="" valType="str"/>
-    <Param name="Window size (pixels)" updates="None" val="[1440, 900]" valType="code"/>
+    <Param name="Window size (pixels)" updates="None" val="[1920, 1080]" valType="code"/>
     <Param name="blendMode" updates="None" val="avg" valType="str"/>
     <Param name="color" updates="None" val="black" valType="str"/>
     <Param name="colorSpace" updates="None" val="rgb" valType="str"/>
-    <Param name="expName" updates="None" val="msit_4nums_newfeedback" valType="str"/>
+    <Param name="expName" updates="None" val="msit" valType="str"/>
     <Param name="exportHTML" updates="None" val="on Sync" valType="str"/>
     <Param name="logging level" updates="None" val="exp" valType="code"/>
   </Settings>
@@ -35,7 +35,7 @@
         <Param name="Begin Experiment" updates="constant" val="# for 1st trial of task (during 1st incongruent block), allowed response time is 5 seconds&amp;#10;allowedRT = 5&amp;#10;&amp;#10;# set 'consecutive correct/incorrect' variables for ITI yoking&amp;#10;numConsecutiveCorrect = 0&amp;#10;numConsecutiveIncorrect = 0&amp;#10;" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Begin Routine" updates="constant" val="# conver the numbers to a string for presentation&amp;#10;if numStims == 4:&amp;#10;    nums = '%d %d %d %d'%(num1, num2, num3, num4)&amp;#10;    allowedKeys = ['1', '2', '3', '4']&amp;#10;elif numStims == 3:&amp;#10;    nums = '%d %d %d'%(num1, num2, num3)&amp;#10;    allowedKeys = ['1', '2', '3']&amp;#10;&amp;#10;# calculate correct response given num1 num2 num3 (num4)&amp;#10;for i in nums:&amp;#10;  if nums.count(i) == 1:&amp;#10;    corrAns = i&amp;#10;    break&amp;#10;&amp;#10;### RT and ITI ###&amp;#10;# for 1st trial of task (during 1st incongruent block), allowed response time is 5 seconds&amp;#10;# for 2nd trial, record the prior RT and add 300ms to it for subsequent trials&amp;#10;# for trial 2-n, use titration methods below&amp;#10;if Condition == 'Incongruent' and msit_block_condition_order.thisN == 0 and trial_list.thisN == 1:&amp;#10;    if resp.keys:&amp;#10;        allowedRT = resp.rt + .3&amp;#10;    else: # if for some reason there is not a respone on trial 1&amp;#10;        allowedRT = 5000 &amp;#10;&amp;#10;# for CONGRUENT blocks, set ITI to the mean ITI of the prior incongruent block&amp;#10;if Condition == 'Congruent' and trial_list.thisN == 0:&amp;#10;    if np.isfinite(meanRT):&amp;#10;        allowedRT = meanRT&amp;#10;    else:&amp;#10;        allowedRT = 5000&amp;#10;&amp;#10;# for INCONGRUENT blocks, titrate allowed reaction time (ITI)&amp;#10;# if participant is correct 3 trials in a row, shorten allowed time by 300ms&amp;#10;# if participant is incorrect 3 trials in a row, lengthen allowed time by 300ms&amp;#10;if Condition == 'Incongruent':&amp;#10;    if numConsecutiveCorrect &gt;= 3:&amp;#10;        allowedRT = allowedRT - .3&amp;#10;    if numConsecutiveIncorrect &gt;= 3:&amp;#10;        allowedRT = allowedRT + .3&amp;#10;&amp;#10;# do not allow the ITI to get too long or too short&amp;#10;if allowedRT &lt; .4:&amp;#10;    allowedRT = .4&amp;#10;elif allowedRT &gt; 5:&amp;#10;    allowedRT = 5&amp;#10;&amp;#10;# record onset times for each block and trial (measured within block)&amp;#10;# first, record clock as block onset for when it is the first trial&amp;#10;if trial_list.thisN == 0: &amp;#10;    blockOnset = globalClock.getTime() - scannerTriggerOnset&amp;#10;# second, record clock as trial onset&amp;#10;trialOnset = globalClock.getTime() - blockOnset&amp;#10;&amp;#10;# log timing variables for manipulation checks&amp;#10;thisExp.addData('blockOnset', blockOnset)&amp;#10;thisExp.addData('trialOnset', trialOnset)&amp;#10;&amp;#10;" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="# conver the numbers to a string for presentation&amp;#10;if numStims == 4:&amp;#10;    nums = '%d %d %d %d'%(num1, num2, num3, num4)&amp;#10;    allowedKeys = ['1', '2', '3', '4']&amp;#10;elif numStims == 3:&amp;#10;    nums = '%d %d %d'%(num1, num2, num3)&amp;#10;    allowedKeys = ['1', '2', '3']&amp;#10;&amp;#10;# calculate correct response given num1 num2 num3 (num4)&amp;#10;for i in nums:&amp;#10;  if nums.count(i) == 1:&amp;#10;    corrAns = i&amp;#10;    break&amp;#10;&amp;#10;### RT and ITI ###&amp;#10;# for 1st trial of task (during 1st incongruent block), allowed response time is 5 seconds&amp;#10;# for 2nd trial, record the prior RT and add 300ms to it for subsequent trials&amp;#10;# for trial 2-n, use titration methods below&amp;#10;if Condition == 'Incongruent' and msit_block_condition_order.thisN == 0 and trial_list.thisN == 1:&amp;#10;    if resp.keys:&amp;#10;        allowedRT = resp.rt + .3&amp;#10;    else: # if for some reason there is not a respone on trial 1&amp;#10;        allowedRT = 5000 &amp;#10;&amp;#10;# for CONGRUENT blocks, set ITI to the mean ITI of the prior incongruent block&amp;#10;if Condition == 'Congruent' and trial_list.thisN == 0:&amp;#10;    if np.isfinite(meanRT):&amp;#10;        allowedRT = meanRT&amp;#10;    else:&amp;#10;        allowedRT = 5000&amp;#10;&amp;#10;# for INCONGRUENT blocks, titrate allowed reaction time (ITI)&amp;#10;# if participant is correct 3 trials in a row, shorten allowed time by 300ms&amp;#10;# if participant is incorrect 3 trials in a row, lengthen allowed time by 300ms&amp;#10;if Condition == 'Incongruent':&amp;#10;    if numConsecutiveCorrect &gt;= 3:&amp;#10;        allowedRT = allowedRT - .3&amp;#10;    if numConsecutiveIncorrect &gt;= 3:&amp;#10;        allowedRT = allowedRT + .3&amp;#10;&amp;#10;# do not allow the ITI to get too long or too short&amp;#10;if allowedRT &lt; .4:&amp;#10;    allowedRT = .4&amp;#10;elif allowedRT &gt; 5:&amp;#10;    allowedRT = 5&amp;#10;&amp;#10;# record onset times for each block and trial (measured within block)&amp;#10;# first, record clock as block onset for when it is the first trial&amp;#10;if trial_list.thisN == 0: &amp;#10;    blockOnset = globalClock.getTime() - scannerTriggerOnset&amp;#10;# second, record clock as trial onset&amp;#10;trialOnset = globalClock.getTime() - scannerTriggerOnset - blockOnset&amp;#10;&amp;#10;# log timing variables for manipulation checks&amp;#10;thisExp.addData('blockOnset', blockOnset)&amp;#10;thisExp.addData('trialOnset', trialOnset)&amp;#10;&amp;#10;" valType="extendedCode"/>
         <Param name="Code Type" updates="None" val="Py" valType="str"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
@@ -148,7 +148,7 @@
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="End JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="End JS Routine" updates="constant" val="" valType="extendedCode"/>
-        <Param name="End Routine" updates="constant" val="# block lengths should not go over allotted time (usually 60 sec)&amp;#10;# if there is not enough time for a new trial, then terminate routine&amp;#10;if globalClock.getTime() - blockOnset + allowedRT + feedbackLength &gt; blockLength:&amp;#10;    trial_list.finished = True&amp;#10;    continueRoutine = False&amp;#10;&amp;#10;" valType="extendedCode"/>
+        <Param name="End Routine" updates="constant" val="# block lengths should not go over allotted time (usually 60 sec)&amp;#10;# if there is not enough time for a new trial, then terminate routine&amp;#10;if globalClock.getTime() - scannerTriggerOnset - blockOnset + allowedRT + feedbackLength &gt; blockLength:&amp;#10;    trial_list.finished = True&amp;#10;    continueRoutine = False&amp;#10;&amp;#10;" valType="extendedCode"/>
         <Param name="name" updates="None" val="feedback_code" valType="code"/>
       </CodeComponent>
       <TextComponent name="number_stims_cont">
@@ -242,7 +242,7 @@
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Begin Routine" updates="constant" val="# record number of trials completed in the block - need this for yoking congruent blocks&amp;#10;numCompletedTrials = trial_list.thisN&amp;#10;thisExp.addData('numCompletedTrials', numCompletedTrials)&amp;#10;&amp;#10;# need to 'pad' the resting baseline duration since MSIT blocks end a few seconds early&amp;#10;restOnset = globalClock.getTime() - scannerTriggerOnset&amp;#10;restDurationPad = ((round(restOnset/10))*10) - restOnset&amp;#10;&amp;#10;thisExp.addData('restOnset', restOnset)&amp;#10;thisExp.addData('thisRestDuration', restDuration + restDurationPad)&amp;#10;" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="# record number of trials completed in the block - need this for yoking congruent blocks&amp;#10;numCompletedTrials = trial_list.thisN&amp;#10;thisExp.addData('numCompletedTrials', numCompletedTrials)&amp;#10;&amp;#10;# need to 'pad' the resting baseline duration since MSIT blocks end a few seconds early&amp;#10;restOnset = globalClock.getTime() - scannerTriggerOnset&amp;#10;restDurationPad = ((np.ceil(restOnset/10))*10) - restOnset&amp;#10;&amp;#10;thisExp.addData('restOnset', restOnset)&amp;#10;thisExp.addData('thisRestDuration', restDuration + restDurationPad)&amp;#10;" valType="extendedCode"/>
         <Param name="Code Type" updates="None" val="Py" valType="str"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
@@ -351,6 +351,20 @@
       </KeyboardComponent>
     </Routine>
     <Routine name="end">
+      <CodeComponent name="end_code">
+        <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="endOnset = globalClock.getTime() - scannerTriggerOnset&amp;#10;thisExp.addData('endOnset', endOnset)" valType="extendedCode"/>
+        <Param name="Code Type" updates="None" val="Py" valType="str"/>
+        <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End JS Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End JS Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="name" updates="None" val="end_code" valType="code"/>
+      </CodeComponent>
       <TextComponent name="end_text">
         <Param name="color" updates="constant" val="white" valType="str"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>

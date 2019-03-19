@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v3.0.0b12),
-    on Thu Mar 14 00:24:57 2019
+    on Tue Mar 19 16:48:53 2019
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -27,7 +27,7 @@ os.chdir(_thisDir)
 
 # Store info about the experiment session
 psychopyVersion = '3.0.0b12'
-expName = 'msit_4nums_newfeedback'  # from the Builder filename that created this script
+expName = 'msit'  # from the Builder filename that created this script
 expInfo = {'participant': '', 'session': '001'}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
@@ -42,7 +42,7 @@ filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['participant'], expNa
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='/Users/tekraynak/Box/TEK/NOAH/psychopy/msit/msit.py',
+    originPath='/Users/tek31/Box/TEK/NOAH/psychopy/msit/msit.py',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -55,7 +55,7 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 
 # Setup the Window
 win = visual.Window(
-    size=[1440, 900], fullscr=True, screen=0,
+    size=[1920, 1080], fullscr=True, screen=0,
     allowGUI=False, allowStencil=False,
     monitor='testMonitor', color='black', colorSpace='rgb',
     blendMode='avg', useFBO=True)
@@ -183,13 +183,14 @@ rest_end_crosshair = visual.TextStim(win=win, name='rest_end_crosshair',
 
 # Initialize components for Routine "end"
 endClock = core.Clock()
+
 end_text = visual.TextStim(win=win, name='end_text',
     text='THANK YOU!',
     font='Arial',
     pos=(0, 0), height=0.2, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
-    depth=0.0);
+    depth=-1.0);
 
 # Create some handy timers
 globalClock = core.Clock()  # to track the time since experiment started
@@ -489,7 +490,7 @@ for thisMsit_block_condition_order in msit_block_condition_order:
         if trial_list.thisN == 0: 
             blockOnset = globalClock.getTime() - scannerTriggerOnset
         # second, record clock as trial onset
-        trialOnset = globalClock.getTime() - blockOnset
+        trialOnset = globalClock.getTime() - scannerTriggerOnset - blockOnset
         
         # log timing variables for manipulation checks
         thisExp.addData('blockOnset', blockOnset)
@@ -773,7 +774,7 @@ for thisMsit_block_condition_order in msit_block_condition_order:
                 thisComponent.setAutoDraw(False)
         # block lengths should not go over allotted time (usually 60 sec)
         # if there is not enough time for a new trial, then terminate routine
-        if globalClock.getTime() - blockOnset + allowedRT + feedbackLength > blockLength:
+        if globalClock.getTime() - scannerTriggerOnset - blockOnset + allowedRT + feedbackLength > blockLength:
             trial_list.finished = True
             continueRoutine = False
         
@@ -797,7 +798,7 @@ for thisMsit_block_condition_order in msit_block_condition_order:
     
     # need to 'pad' the resting baseline duration since MSIT blocks end a few seconds early
     restOnset = globalClock.getTime() - scannerTriggerOnset
-    restDurationPad = ((round(restOnset/10))*10) - restOnset
+    restDurationPad = ((np.ceil(restOnset/10))*10) - restOnset
     
     thisExp.addData('restOnset', restOnset)
     thisExp.addData('thisRestDuration', restDuration + restDurationPad)
@@ -860,6 +861,8 @@ frameN = -1
 continueRoutine = True
 routineTimer.add(3.000000)
 # update component parameters for each repeat
+endOnset = globalClock.getTime() - scannerTriggerOnset
+thisExp.addData('endOnset', endOnset)
 # keep track of which components have finished
 endComponents = [end_text]
 for thisComponent in endComponents:
@@ -872,6 +875,7 @@ while continueRoutine and routineTimer.getTime() > 0:
     t = endClock.getTime()
     frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
     # update/draw components on each frame
+    
     
     # *end_text* updates
     if t >= 0.0 and end_text.status == NOT_STARTED:
@@ -904,6 +908,8 @@ while continueRoutine and routineTimer.getTime() > 0:
 for thisComponent in endComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
+
+
 
 
 
