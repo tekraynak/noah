@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v3.0.0b12),
-    on Tue Mar 19 16:48:53 2019
+    on Wed Mar 27 00:23:54 2019
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -37,12 +37,12 @@ expInfo['expName'] = expName
 expInfo['psychopyVersion'] = psychopyVersion
 
 # Data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
-filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])
+filename = _thisDir + os.sep + u'data/sub-%s_task-%s_beh' % (expInfo['participant'], expName)
 
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='/Users/tek31/Box/TEK/NOAH/psychopy/msit/msit.py',
+    originPath='/Users/tekraynak/Box/TEK/NOAH/psychopy/msit/msit.py',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -800,7 +800,10 @@ for thisMsit_block_condition_order in msit_block_condition_order:
     restOnset = globalClock.getTime() - scannerTriggerOnset
     restDurationPad = ((np.ceil(restOnset/10))*10) - restOnset
     
+    blockDuration = restOnset - blockOnset
+    
     thisExp.addData('restOnset', restOnset)
+    thisExp.addData('blockDuration', blockDuration)
     thisExp.addData('thisRestDuration', restDuration + restDurationPad)
     
     # keep track of which components have finished

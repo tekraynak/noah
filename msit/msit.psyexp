@@ -2,7 +2,7 @@
 <PsychoPy2experiment encoding="utf-8" version="3.0.0b12">
   <Settings>
     <Param name="Completed URL" updates="None" val="" valType="str"/>
-    <Param name="Data filename" updates="None" val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code"/>
+    <Param name="Data filename" updates="None" val="u'data/sub-%s_task-%s_beh' % (expInfo['participant'], expName)" valType="code"/>
     <Param name="Enable Escape" updates="None" val="True" valType="bool"/>
     <Param name="Experiment info" updates="None" val="{'participant': '', 'session': '001'}" valType="code"/>
     <Param name="Force stereo" updates="None" val="True" valType="bool"/>
@@ -242,7 +242,7 @@
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Begin Routine" updates="constant" val="# record number of trials completed in the block - need this for yoking congruent blocks&amp;#10;numCompletedTrials = trial_list.thisN&amp;#10;thisExp.addData('numCompletedTrials', numCompletedTrials)&amp;#10;&amp;#10;# need to 'pad' the resting baseline duration since MSIT blocks end a few seconds early&amp;#10;restOnset = globalClock.getTime() - scannerTriggerOnset&amp;#10;restDurationPad = ((np.ceil(restOnset/10))*10) - restOnset&amp;#10;&amp;#10;thisExp.addData('restOnset', restOnset)&amp;#10;thisExp.addData('thisRestDuration', restDuration + restDurationPad)&amp;#10;" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="# record number of trials completed in the block - need this for yoking congruent blocks&amp;#10;numCompletedTrials = trial_list.thisN&amp;#10;thisExp.addData('numCompletedTrials', numCompletedTrials)&amp;#10;&amp;#10;# need to 'pad' the resting baseline duration since MSIT blocks end a few seconds early&amp;#10;restOnset = globalClock.getTime() - scannerTriggerOnset&amp;#10;restDurationPad = ((np.ceil(restOnset/10))*10) - restOnset&amp;#10;&amp;#10;blockDuration = restOnset - blockOnset&amp;#10;&amp;#10;thisExp.addData('restOnset', restOnset)&amp;#10;thisExp.addData('blockDuration', blockDuration)&amp;#10;thisExp.addData('thisRestDuration', restDuration + restDurationPad)&amp;#10;" valType="extendedCode"/>
         <Param name="Code Type" updates="None" val="Py" valType="str"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
