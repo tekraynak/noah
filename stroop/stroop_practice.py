@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v3.0.0b12),
-    on Tue May 14 00:47:30 2019
+    on Tue May 14 08:48:28 2019
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -28,7 +28,7 @@ os.chdir(_thisDir)
 # Store info about the experiment session
 psychopyVersion = '3.0.0b12'
 expName = 'stroop_practice'  # from the Builder filename that created this script
-expInfo = {}
+expInfo = {'participant': ''}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
     core.quit()  # user pressed cancel
@@ -43,8 +43,10 @@ filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['participant'], expNa
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
     originPath='/Users/tekraynak/Box/TEK/NOAH/psychopy/stroop/stroop_practice.py',
-    savePickle=True, saveWideText=False,
+    savePickle=True, saveWideText=True,
     dataFileName=filename)
+# save a log file for detail verbose info
+logFile = logging.LogFile(filename+'.log', level=logging.EXP)
 logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a file
 
 endExpNow = False  # flag for 'escape' or other condition => quit the exp
@@ -632,13 +634,13 @@ for thisStroop_block_condition_order in stroop_block_condition_order:
                 msg = "✓" 
                 msg_color = 'white'
                 msg_size = .3
-                yPosResp = -.3 # display ✓ just below the words
+                yPosResp = -.3 # display ✓ just below the numbers
                 msg2 = '' # do not show the correct response on a delay
-            elif resp.corr == 0: # INCORRECT RESPONSE
+            elif resp.corr == 0:
                 msg = "X"
                 msg_color = 'red'
                 msg_size = .5 # make the X a little bigger
-                yPosResp = -.15 # display X directly over the words
+                yPosResp = -.1 # display X directly over the numbers
                 msg2 = "✓" # show the correct response on a delay
         else:# NO RESPONSE (note, resp.keys will be blank)
             showCircle = 0 # set circle component to transparent (Tim - any better way to do this?)
@@ -864,7 +866,9 @@ for thisComponent in endComponents:
 
 
 # these shouldn't be strictly necessary (should auto-save)
+thisExp.saveAsWideText(filename+'.csv')
 thisExp.saveAsPickle(filename)
+logging.flush()
 # make sure everything is closed down
 thisExp.abort()  # or data files will save again on exit
 win.close()
