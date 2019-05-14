@@ -1,0 +1,9 @@
+trialnum,instruction,condition_num,valence,image,rest_duration
+1,LOOK,2,negative,images/105.bmp,3
+2,DECREASE,3,negative,images/112.bmp,3
+3,DECREASE,3,negative,images/9430.bmp,3
+4,LOOK,1,neutral,images/7497.bmp,3
+5,DECREASE,3,negative,images/9620.bmp,1
+6,LOOK,2,negative,images/9075.bmp,3
+7,DECREASE,3,negative,images/3140.bmp,3
+8,DECREASE,3,negative,images/6571.bmp,1
