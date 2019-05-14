@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v3.0.0b12),
-    on Tue Mar 19 16:48:51 2019
+    on Tue May 14 08:47:55 2019
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -28,7 +28,7 @@ os.chdir(_thisDir)
 # Store info about the experiment session
 psychopyVersion = '3.0.0b12'
 expName = 'stroop'  # from the Builder filename that created this script
-expInfo = {'participant': '', 'session': '001'}
+expInfo = {'participant': ''}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
     core.quit()  # user pressed cancel
@@ -37,12 +37,12 @@ expInfo['expName'] = expName
 expInfo['psychopyVersion'] = psychopyVersion
 
 # Data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
-filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])
+filename = _thisDir + os.sep + u'data/sub-%s_task-%s_beh' % (expInfo['participant'], expName)
 
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='/Users/tek31/Box/TEK/NOAH/psychopy/stroop/stroop.py',
+    originPath='/Users/tekraynak/Box/TEK/NOAH/psychopy/stroop/stroop.py',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -55,7 +55,7 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 
 # Setup the Window
 win = visual.Window(
-    size=[1440, 900], fullscr=True, screen=0,
+    size=[1920, 1080], fullscr=True, screen=0,
     allowGUI=False, allowStencil=False,
     monitor='testMonitor', color='black', colorSpace='rgb',
     blendMode='avg', useFBO=True)
@@ -747,13 +747,13 @@ for thisStroop_block_condition_order in stroop_block_condition_order:
                 msg = "✓" 
                 msg_color = 'white'
                 msg_size = .3
-                yPosResp = -.3 # display ✓ just below the numbers
+                yPosResp = -.3 # display ✓ just below the words
                 msg2 = '' # do not show the correct response on a delay
             elif resp.corr == 0:
                 msg = "X"
                 msg_color = 'red'
                 msg_size = .5 # make the X a little bigger
-                yPosResp = 0 # display X directly over the numbers
+                yPosResp = -.15 # display X directly over the words
                 msg2 = "✓" # show the correct response on a delay
         else:# NO RESPONSE (note, resp.keys will be blank)
             showCircle = 0 # set circle component to transparent (Tim - any better way to do this?)
