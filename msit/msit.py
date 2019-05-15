@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v3.0.0b12),
-    on Wed Mar 27 00:23:54 2019
+    on Tue May 14 23:18:01 2019
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -28,7 +28,7 @@ os.chdir(_thisDir)
 # Store info about the experiment session
 psychopyVersion = '3.0.0b12'
 expName = 'msit'  # from the Builder filename that created this script
-expInfo = {'participant': '', 'session': '001'}
+expInfo = {'participant': ''}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
     core.quit()  # user pressed cancel
@@ -92,6 +92,8 @@ restDuration = 10
 numStims = 4
 
 ######################################################
+
+
 instructions_text = visual.TextStim(win=win, name='instructions_text',
     text='    instructions:\n\npress "space" to start',
     font='Arial',
@@ -299,7 +301,7 @@ while continueRoutine:
         # keyboard checking is just starting
         event.clearEvents(eventType='keyboard')
     if scanner_trigger.status == STARTED:
-        theseKeys = event.getKeys(keyList=['asciicircum'])
+        theseKeys = event.getKeys(keyList=['asciicircum', 'equal', 't'])
         
         # check for quit:
         if "escape" in theseKeys:
@@ -439,7 +441,7 @@ for thisMsit_block_condition_order in msit_block_condition_order:
         frameN = -1
         continueRoutine = True
         # update component parameters for each repeat
-        # conver the numbers to a string for presentation
+        # convert the numbers to a string for presentation
         if numStims == 4:
             nums = '%d %d %d %d'%(num1, num2, num3, num4)
             allowedKeys = ['1', '2', '3', '4']
@@ -453,31 +455,35 @@ for thisMsit_block_condition_order in msit_block_condition_order:
             corrAns = i
             break
         
-        ### RT and ITI ###
-        # for 1st trial of task (during 1st incongruent block), allowed response time is 5 seconds
-        # for 2nd trial, record the prior RT and add 300ms to it for subsequent trials
-        # for trial 2-n, use titration methods below
-        if Condition == 'Incongruent' and msit_block_condition_order.thisN == 0 and trial_list.thisN == 1:
-            if resp.keys:
-                allowedRT = resp.rt + .3
-            else: # if for some reason there is not a respone on trial 1
-                allowedRT = 5000 
+        # on first trial of each block, create arrays to store running accuracy
+        if trial_list.thisN == 0:
+            rt_list = []
+            corr_list = []
+            numConsecutiveCorrect = 0
+            numConsecutiveIncorrect = 0
         
-        # for CONGRUENT blocks, set ITI to the mean ITI of the prior incongruent block
-        if Condition == 'Congruent' and trial_list.thisN == 0:
-            if np.isfinite(meanRT):
-                allowedRT = meanRT
-            else:
-                allowedRT = 5000
-        
-        # for INCONGRUENT blocks, titrate allowed reaction time (ITI)
+        ### RT and ITI ### - FIXED
+        # for INCONGRUENT BLOCKS, allowed response time is 5 seconds until a correct response is made
+        # after the first correct response, record the prior RT and add 300ms for the following trial
+        # for subsequent trials, titrate allowed reaction time according to performance:
         # if participant is correct 3 trials in a row, shorten allowed time by 300ms
         # if participant is incorrect 3 trials in a row, lengthen allowed time by 300ms
         if Condition == 'Incongruent':
+            if np.sum(corr_list) == 0: # no correct responses have yet been made this block
+                allowedRT = 5
+            if np.sum(corr_list) == 1 and corr_list[-1] == 1: # exactly 1 correct response has been made and it was the most recent response
+                allowedRT = resp.rt + .3
             if numConsecutiveCorrect >= 3:
                 allowedRT = allowedRT - .3
             if numConsecutiveIncorrect >= 3:
                 allowedRT = allowedRT + .3
+        
+        # for CONGRUENT BLOCKS, set ITI to the mean ITI of the prior incongruent block
+        if Condition == 'Congruent' and trial_list.thisN == 0:
+            if np.isfinite(meanRT):
+                allowedRT = meanRT
+            else:
+                allowedRT = 5
         
         # do not allow the ITI to get too long or too short
         if allowedRT < .4:
@@ -582,12 +588,6 @@ for thisMsit_block_condition_order in msit_block_condition_order:
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
         # calculate mean running (1) accuracy and (2) reaction time
-        # first, create arrays to store these data (overwrite during every new block)
-        if trial_list.thisN == 0:
-            rt_list = []
-            corr_list = []
-            numConsecutiveCorrect = 0
-            numConsecutiveIncorrect = 0
         
         # if participant responds during the trial, add the RT to the running list
         if resp.keys:
