@@ -61,7 +61,7 @@
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
         <Param name="stopType" updates="None" val="time (s)" valType="str"/>
-        <Param name="stopVal" updates="constant" val="$allowedRT" valType="code"/>
+        <Param name="stopVal" updates="constant" val="$timeOnScreen" valType="code"/>
         <Param name="text" updates="set every repeat" val="$target&amp;#10;" valType="str"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
@@ -82,7 +82,7 @@
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
         <Param name="stopType" updates="None" val="time (s)" valType="str"/>
-        <Param name="stopVal" updates="constant" val="$allowedRT" valType="code"/>
+        <Param name="stopVal" updates="constant" val="$timeOnScreen" valType="code"/>
         <Param name="text" updates="set every repeat" val="$w1" valType="str"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
@@ -103,7 +103,7 @@
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
         <Param name="stopType" updates="None" val="time (s)" valType="str"/>
-        <Param name="stopVal" updates="constant" val="$allowedRT" valType="code"/>
+        <Param name="stopVal" updates="constant" val="$timeOnScreen" valType="code"/>
         <Param name="text" updates="set every repeat" val="$w2" valType="str"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
@@ -124,7 +124,7 @@
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
         <Param name="stopType" updates="None" val="time (s)" valType="str"/>
-        <Param name="stopVal" updates="constant" val="$allowedRT" valType="code"/>
+        <Param name="stopVal" updates="constant" val="$timeOnScreen" valType="code"/>
         <Param name="text" updates="set every repeat" val="$w3" valType="str"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
@@ -145,7 +145,7 @@
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
         <Param name="stopType" updates="None" val="time (s)" valType="str"/>
-        <Param name="stopVal" updates="constant" val="$allowedRT" valType="code"/>
+        <Param name="stopVal" updates="constant" val="$timeOnScreen" valType="code"/>
         <Param name="text" updates="set every repeat" val="$w4" valType="str"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
@@ -444,7 +444,7 @@
     </Routine>
     <Routine name="instructions">
       <CodeComponent name="experiment_default_variables">
-        <Param name="Begin Experiment" updates="constant" val="import numpy as np&amp;#10;&amp;#10;######################################################&amp;#10;# EXPERIMENTAL PARAMETERS THAT THE USER CAN MANIPULATE:&amp;#10;######################################################&amp;#10;&amp;#10;# set number of blocks in experiment (default = 4)&amp;#10;# NOTE: one block = rest + incongruent + rest + congruent&amp;#10;numBlocks = 4&amp;#10;&amp;#10;# set duration (sec) for incongruent/congruent blocks (default = 60, must be divisible by 10)&amp;#10;blockDuration = 60&amp;#10;&amp;#10;# set duration (sec) for rest periods (default = 10, must be divisible by 10)&amp;#10;# note this will be padded with a few varying seconds&amp;#10;restDuration = 10&amp;#10;&amp;#10;######################################################" valType="extendedCode"/>
+        <Param name="Begin Experiment" updates="constant" val="import numpy as np&amp;#10;&amp;#10;######################################################&amp;#10;# EXPERIMENTAL PARAMETERS THAT THE USER CAN MANIPULATE:&amp;#10;######################################################&amp;#10;&amp;#10;# set number of blocks in experiment (default = 4)&amp;#10;# NOTE: one block = rest + incongruent + rest + congruent&amp;#10;numBlocks = 4&amp;#10;&amp;#10;# set duration (sec) for incongruent/congruent blocks (default = 60, must be divisible by 10)&amp;#10;blockDuration = 60&amp;#10;&amp;#10;# set duration (sec) for rest periods (default = 10, must be divisible by 10)&amp;#10;# note this will be padded with a few varying seconds&amp;#10;restDuration = 10&amp;#10;&amp;#10;######################################################&amp;#10;&amp;#10;timeOnScreen = .3&amp;#10;" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Routine" updates="constant" val="" valType="extendedCode"/>
