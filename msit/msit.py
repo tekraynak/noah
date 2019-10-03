@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v3.0.0b12),
-    on Tue May 14 23:18:01 2019
+    on Sun Aug  4 18:00:46 2019
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -28,7 +28,7 @@ os.chdir(_thisDir)
 # Store info about the experiment session
 psychopyVersion = '3.0.0b12'
 expName = 'msit'  # from the Builder filename that created this script
-expInfo = {'participant': ''}
+expInfo = {'participant': '', 'visit': ''}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
     core.quit()  # user pressed cancel
@@ -37,12 +37,12 @@ expInfo['expName'] = expName
 expInfo['psychopyVersion'] = psychopyVersion
 
 # Data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
-filename = _thisDir + os.sep + u'data/sub-%s_task-%s_beh' % (expInfo['participant'], expName)
+filename = _thisDir + os.sep + u'../data/sub-%s/ses-%s/sub-%s_ses-%s_task-%s_beh' % (expInfo['participant'], expInfo['visit'], expInfo['participant'], expInfo['visit'], expName)
 
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='/Users/tekraynak/Box/TEK/NOAH/psychopy/msit/msit.py',
+    originPath='/Users/tekraynak/Box/TEK/NOAH/tasks/msit/msit.py',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -79,7 +79,7 @@ import numpy as np
 numBlocks = 4
 
 # set duration (sec) for incongruent/congruent blocks (default = 60, must be divisible by 10)
-blockLength = 60
+blockDuration = 60
 
 # set duration (sec) for rest periods (default = 10, must be divisible by 10)
 # note this will be padded with a few varying seconds
@@ -95,7 +95,7 @@ numStims = 4
 
 
 instructions_text = visual.TextStim(win=win, name='instructions_text',
-    text='    instructions:\n\npress "space" to start',
+    text='Please wait\n\nThe task will begin soon',
     font='Arial',
     pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
@@ -113,15 +113,16 @@ waiting_for_scanner_text = visual.TextStim(win=win, name='waiting_for_scanner_te
     languageStyle='LTR',
     depth=-2.0);
 
-# Initialize components for Routine "rest_begin"
-rest_beginClock = core.Clock()
+# Initialize components for Routine "rest"
+restClock = core.Clock()
+
 rest_begin_crosshair = visual.TextStim(win=win, name='rest_begin_crosshair',
     text='+',
     font='Arial',
     pos=(0, 0), height=0.5, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
-    depth=0.0);
+    depth=-1.0);
 
 # Initialize components for Routine "trial"
 trialClock = core.Clock()
@@ -171,17 +172,6 @@ respCircle = visual.Polygon(
     lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
     fillColor=[1,1,1], fillColorSpace='rgb',
     opacity=1.0, depth=-4.0, interpolate=True)
-
-# Initialize components for Routine "rest_end"
-rest_endClock = core.Clock()
-
-rest_end_crosshair = visual.TextStim(win=win, name='rest_end_crosshair',
-    text='+',
-    font='Arial',
-    pos=(0, 0), height=0.5, wrapWidth=None, ori=0, 
-    color='white', colorSpace='rgb', opacity=1, 
-    languageStyle='LTR',
-    depth=-1.0);
 
 # Initialize components for Routine "end"
 endClock = core.Clock()
@@ -363,24 +353,34 @@ for thisMsit_block_condition_order in msit_block_condition_order:
         for paramName in thisMsit_block_condition_order:
             exec('{} = thisMsit_block_condition_order[paramName]'.format(paramName))
     
-    # ------Prepare to start Routine "rest_begin"-------
+    # ------Prepare to start Routine "rest"-------
     t = 0
-    rest_beginClock.reset()  # clock
+    restClock.reset()  # clock
     frameN = -1
     continueRoutine = True
     # update component parameters for each repeat
+    restOnset = globalClock.getTime() - scannerTriggerOnset
+    
+    restEnd = (msit_block_condition_order.thisN*(blockDuration+restDuration))+restDuration
+    
+    thisRestDuration = restEnd - restOnset
+    
+    thisExp.addData('restOnset', restOnset)
+    thisExp.addData('restEnd', restEnd)
+    thisExp.addData('thisRestDuration', thisRestDuration)
     # keep track of which components have finished
-    rest_beginComponents = [rest_begin_crosshair]
-    for thisComponent in rest_beginComponents:
+    restComponents = [rest_begin_crosshair]
+    for thisComponent in restComponents:
         if hasattr(thisComponent, 'status'):
             thisComponent.status = NOT_STARTED
     
-    # -------Start Routine "rest_begin"-------
+    # -------Start Routine "rest"-------
     while continueRoutine:
         # get current time
-        t = rest_beginClock.getTime()
+        t = restClock.getTime()
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
+        
         
         # *rest_begin_crosshair* updates
         if t >= 0.0 and rest_begin_crosshair.status == NOT_STARTED:
@@ -388,7 +388,7 @@ for thisMsit_block_condition_order in msit_block_condition_order:
             rest_begin_crosshair.tStart = t
             rest_begin_crosshair.frameNStart = frameN  # exact frame index
             rest_begin_crosshair.setAutoDraw(True)
-        frameRemains = 0.0 + restDuration- win.monitorFramePeriod * 0.75  # most of one frame period left
+        frameRemains = 0.0 + thisRestDuration- win.monitorFramePeriod * 0.75  # most of one frame period left
         if rest_begin_crosshair.status == STARTED and t >= frameRemains:
             rest_begin_crosshair.setAutoDraw(False)
         
@@ -396,7 +396,7 @@ for thisMsit_block_condition_order in msit_block_condition_order:
         if not continueRoutine:  # a component has requested a forced-end of Routine
             break
         continueRoutine = False  # will revert to True if at least one component still running
-        for thisComponent in rest_beginComponents:
+        for thisComponent in restComponents:
             if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
                 continueRoutine = True
                 break  # at least one component has not yet finished
@@ -409,11 +409,12 @@ for thisMsit_block_condition_order in msit_block_condition_order:
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
     
-    # -------Ending Routine "rest_begin"-------
-    for thisComponent in rest_beginComponents:
+    # -------Ending Routine "rest"-------
+    for thisComponent in restComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
-    # the Routine "rest_begin" was not non-slip safe, so reset the non-slip timer
+    
+    # the Routine "rest" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     
     # set up handler to look after randomisation of conditions etc
@@ -639,7 +640,7 @@ for thisMsit_block_condition_order in msit_block_condition_order:
         if Condition == 'Incongruent':
             feedbackLength = 1
         elif Condition == 'Congruent':
-            conTrialLength = (blockLength - restDurationPad) / numCompletedTrials
+            conTrialLength = thisBlockDuration / numCompletedTrials
             conTrialLength = np.floor(conTrialLength*10)/10 # round down to 1 decimal point
             thisExp.addData('conTrialLength', conTrialLength)
             if resp.keys:
@@ -774,9 +775,16 @@ for thisMsit_block_condition_order in msit_block_condition_order:
                 thisComponent.setAutoDraw(False)
         # block lengths should not go over allotted time (usually 60 sec)
         # if there is not enough time for a new trial, then terminate routine
-        if globalClock.getTime() - scannerTriggerOnset - blockOnset + allowedRT + feedbackLength > blockLength:
+        if globalClock.getTime() - scannerTriggerOnset - blockOnset + allowedRT + feedbackLength > blockDuration:
+            thisBlockDuration = globalClock.getTime() - scannerTriggerOnset - blockOnset
+            thisExp.addData('blockDuration', thisBlockDuration)
+            # record number of trials completed in the block - need this for yoking congruent blocks
+            numCompletedTrials = trial_list.thisN
+            thisExp.addData('numCompletedTrials', numCompletedTrials)
             trial_list.finished = True
             continueRoutine = False
+            
+        
         
         
         # the Routine "feedback" was not non-slip safe, so reset the non-slip timer
@@ -785,75 +793,6 @@ for thisMsit_block_condition_order in msit_block_condition_order:
         
     # completed 4 repeats of 'trial_list'
     
-    
-    # ------Prepare to start Routine "rest_end"-------
-    t = 0
-    rest_endClock.reset()  # clock
-    frameN = -1
-    continueRoutine = True
-    # update component parameters for each repeat
-    # record number of trials completed in the block - need this for yoking congruent blocks
-    numCompletedTrials = trial_list.thisN
-    thisExp.addData('numCompletedTrials', numCompletedTrials)
-    
-    # need to 'pad' the resting baseline duration since MSIT blocks end a few seconds early
-    restOnset = globalClock.getTime() - scannerTriggerOnset
-    restDurationPad = ((np.ceil(restOnset/10))*10) - restOnset
-    
-    blockDuration = restOnset - blockOnset
-    
-    thisExp.addData('restOnset', restOnset)
-    thisExp.addData('blockDuration', blockDuration)
-    thisExp.addData('thisRestDuration', restDuration + restDurationPad)
-    
-    # keep track of which components have finished
-    rest_endComponents = [rest_end_crosshair]
-    for thisComponent in rest_endComponents:
-        if hasattr(thisComponent, 'status'):
-            thisComponent.status = NOT_STARTED
-    
-    # -------Start Routine "rest_end"-------
-    while continueRoutine:
-        # get current time
-        t = rest_endClock.getTime()
-        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-        # update/draw components on each frame
-        
-        
-        # *rest_end_crosshair* updates
-        if t >= 0.0 and rest_end_crosshair.status == NOT_STARTED:
-            # keep track of start time/frame for later
-            rest_end_crosshair.tStart = t
-            rest_end_crosshair.frameNStart = frameN  # exact frame index
-            rest_end_crosshair.setAutoDraw(True)
-        frameRemains = restDurationPad - win.monitorFramePeriod * 0.75  # most of one frame period left
-        if rest_end_crosshair.status == STARTED and t >= frameRemains:
-            rest_end_crosshair.setAutoDraw(False)
-        
-        # check if all components have finished
-        if not continueRoutine:  # a component has requested a forced-end of Routine
-            break
-        continueRoutine = False  # will revert to True if at least one component still running
-        for thisComponent in rest_endComponents:
-            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-                continueRoutine = True
-                break  # at least one component has not yet finished
-        
-        # check for quit (the Esc key)
-        if endExpNow or event.getKeys(keyList=["escape"]):
-            core.quit()
-        
-        # refresh the screen
-        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-            win.flip()
-    
-    # -------Ending Routine "rest_end"-------
-    for thisComponent in rest_endComponents:
-        if hasattr(thisComponent, "setAutoDraw"):
-            thisComponent.setAutoDraw(False)
-    
-    # the Routine "rest_end" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset()
 # completed numBlocks repeats of 'msit_block_condition_order'
 
 
@@ -917,6 +856,67 @@ for thisComponent in endComponents:
 
 
 
+import pandas as pd
+# TSV output
+ev_fname = _thisDir + os.sep + u'../data/sub-%s/ses-%s/sub-%s_ses-%s_task-%s_acq-mb3_bold.tsv' % (expInfo['participant'], expInfo['visit'], expInfo['participant'], expInfo['visit'], expName)
+
+tempfile = _thisDir + os.sep + u'../data/sub-%s/ses-%s/_temp' % (expInfo['participant'], expInfo['visit'])
+
+thisExp.saveAsWideText(tempfile + '.csv')
+
+beh_df = pd.read_csv(tempfile + '.csv')
+
+os.remove(tempfile + '.csv')
+
+n_blocks = beh_df["msit_block_condition_order.thisN"].nunique()
+unique_blocks = np.arange(n_blocks)
+
+condition, onset, duration, mean_rt, mean_accuracy, num_trials = [], [], [], [], [], []
+
+for i_block in unique_blocks:
+    this_block_idxs = beh_df[beh_df["msit_block_condition_order.thisN"]==i_block].index
+    condition.append(beh_df.loc[this_block_idxs[0], 'Condition'])
+    onset.append(beh_df.loc[this_block_idxs[0], 'blockOnset'])
+    duration.append(beh_df.loc[this_block_idxs[::-1][0], 'blockDuration'])
+    mean_rt.append(beh_df.loc[this_block_idxs, 'resp.rt'].mean())
+    mean_accuracy.append(beh_df.loc[this_block_idxs, 'resp.corr'].mean())
+    num_trials.append(len(this_block_idxs))
+   
+events_df = pd.DataFrame({'onset': onset,
+                          'duration': duration,
+                          'trial_type': condition,
+                          'mean_rt':mean_rt,
+                          'mean_accuracy': mean_accuracy,
+                          'num_trials':num_trials})
+
+events_df.to_csv(ev_fname, sep="\t", index=False)
+
+# QC text output
+
+incTrials = (beh_df['Condition'] == 'Incongruent')
+conTrials = (beh_df['Condition'] == 'Congruent')
+
+qc_dict = {'ID': expInfo['participant'], 
+'Session': expInfo['visit'],
+'Date': expInfo['date'],
+'Task': expName,
+'IncNumTrials': sum(incTrials),
+'IncRT': beh_df.loc[incTrials, 'resp.rt'].mean(skipna=True),
+'IncACC': beh_df.loc[incTrials, 'resp.corr'].mean(skipna=True),
+'ConNumTrials': sum(conTrials),
+'ConRT': beh_df.loc[conTrials, 'resp.rt'].mean(skipna=True),
+'ConACC': beh_df.loc[conTrials, 'resp.corr'].mean(skipna=True)
+}
+
+qc_filename = _thisDir + os.sep + u'../data/sub-%s/ses-%s/sub-%s_ses-%s_task-%s_qc' % (expInfo['participant'], expInfo['visit'], expInfo['participant'], expInfo['visit'], expName)
+file = open(qc_filename + ".txt", "w")
+
+for key in ['ID', 'Session', 'Date', 'Task', 'IncNumTrials', 'IncRT', 'IncACC', 'ConNumTrials', 'ConRT', 'ConACC']:
+    file.write(key + ": " + str(qc_dict[key]) + "\n")
+
+   
+
+file.close()
 
 # these shouldn't be strictly necessary (should auto-save)
 thisExp.saveAsWideText(filename+'.csv')
