@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy3 Experiment Builder (v3.0.6),
-    on Sun Aug  4 18:00:41 2019
+This experiment was created using PsychoPy3 Experiment Builder (v3.0.0b12),
+    on Wed Feb 26 18:48:10 2020
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -26,7 +26,7 @@ _thisDir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-psychopyVersion = '3.0.6'
+psychopyVersion = '3.0.0b12'
 expName = 'stroop_new'  # from the Builder filename that created this script
 expInfo = {'participant': '', 'visit': ''}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
@@ -42,7 +42,7 @@ filename = _thisDir + os.sep + u'../data/sub-%s/ses-%s/sub-%s_ses-%s_task-%s_beh
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='/Users/tekraynak/Box/TEK/NOAH/tasks/stroop/stroop.py',
+    originPath='/Users/tek31/Box/TEK/NOAH/tasks/stroop/stroop.py',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -491,12 +491,11 @@ for thisStroop_block_condition_order in stroop_block_condition_order:
         continueRoutine = True
         # update component parameters for each repeat
         
-        # on first trial of each block, create arrays to store running accuracy
+        # on first trial of each block, create arrays to store number correct
         if trial_list.thisN == 0:
-            rt_list = []
-            corr_list = []
             numConsecutiveCorrect = 0
             numConsecutiveIncorrect = 0
+            corr_list = []
         
         ### RT and ITI ### - FIXED
         # for INCONGRUENT BLOCKS, allowed response time is 5 seconds until a correct response is made
@@ -514,12 +513,10 @@ for thisStroop_block_condition_order in stroop_block_condition_order:
             if numConsecutiveIncorrect >= 3:
                 allowedRT = allowedRT + .3
         
-        # for CONGRUENT BLOCKS, set ITI to the mean ITI of the prior incongruent block
-        if Condition == 'Congruent' and trial_list.thisN == 0:
-            if np.isfinite(meanRT):
-                allowedRT = meanRT
-            else:
-                allowedRT = 5
+        # for CONGRUENT BLOCKS, allow response time so there are equal number of incongruent and congruent trials
+        # feedback is always >=1sec
+        if Condition == 'Congruent': # and trial_list.thisN == 0:#
+            allowedRT = meanISI - 1
         
         # do not allow the ITI to get too long or too short
         if allowedRT < .4:
@@ -537,7 +534,6 @@ for thisStroop_block_condition_order in stroop_block_condition_order:
         # log timing variables for manipulation checks
         thisExp.addData('blockOnset', blockOnset)
         thisExp.addData('trialOnset', trialOnset)
-        
         
         target_stim.setColor(targetcolor, colorSpace='rgb')
         target_stim.setText(target
@@ -666,15 +662,8 @@ for thisStroop_block_condition_order in stroop_block_condition_order:
         for thisComponent in trialComponents:
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
-        # calculate mean running (1) accuracy and (2) reaction time
-        
-        # if participant responds during the trial, add the RT to the running list
-        if resp.keys:
-            rt_list.append(resp.rt)
+        #add the outcome of this trial to a running list
         corr_list.append(resp.corr)
-        
-        meanRT = np.mean(rt_list)
-        meanAccuracy = np.mean(corr_list)
         
         # calculate # of consecutive correct / incorrect responses (for yoking incongruent trials)
         if resp.corr:
@@ -686,8 +675,6 @@ for thisStroop_block_condition_order in stroop_block_condition_order:
         
         # export variables
         thisExp.addData('allowedRT', allowedRT)
-        thisExp.addData('meanRT', meanRT)
-        thisExp.addData('meanAccuracy', meanAccuracy)
         thisExp.addData('numConsecutiveCorrect', numConsecutiveCorrect)
         thisExp.addData('numConsecutiveIncorrect', numConsecutiveIncorrect)
         # check responses
@@ -714,17 +701,14 @@ for thisStroop_block_condition_order in stroop_block_condition_order:
         # update component parameters for each repeat
         # set length of feedback window
         # for incongruent blocks, make it 1 sec
-        # for congruent blocks, to control for motor response differences, pad the feedback so there are as many congruent trials as incongruent trials
         if Condition == 'Incongruent':
             feedbackLength = 1
+        # for congruent blocks, to control for motor response differences, pad the feedback so there are as many congruent trials as incongruent trials
         elif Condition == 'Congruent':
-            conTrialLength = thisBlockDuration / numCompletedTrials
-            conTrialLength = np.floor(conTrialLength*10)/10 # round down to 1 decimal point
-            thisExp.addData('conTrialLength', conTrialLength)
             if resp.keys:
-                feedbackLength = conTrialLength - resp.rt
+                feedbackLength = meanISI - resp.rt
             else:
-                feedbackLength = conTrialLength - allowedRT
+                feedbackLength = meanISI - allowedRT
         thisExp.addData('feedbackLength', feedbackLength)
         
         #############################################################################
@@ -901,18 +885,29 @@ for thisStroop_block_condition_order in stroop_block_condition_order:
         for thisComponent in feedbackComponents:
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
-        # block lengths should not go over allotted time (usually 60 sec)
-        # if there is not enough time for a new trial, then terminate routine
-        if globalClock.getTime() - scannerTriggerOnset - blockOnset + allowedRT + feedbackLength > blockDuration:
+        
+        endBlock = 0
+        
+        # for incongruent, calculate time left and ask if there is enough time to squeeze in 1 more trial
+        #   block lengths should not go over allotted time (usually 60 sec)
+        #   if there is not enough time for a new trial, then terminate routine
+        # for congruent, simply ask if the same number of trials have been completed as the prior incongruent block
+        if Condition == 'Incongruent' and globalClock.getTime() - scannerTriggerOnset - blockOnset + allowedRT + feedbackLength > blockDuration:
+            endBlock = 1
+        if Condition == 'Congruent' and trial_list.thisN + 1 == numCompletedTrials:
+            endBlock = 1
+        
+        
+        if endBlock:
             thisBlockDuration = globalClock.getTime() - scannerTriggerOnset - blockOnset
-            thisExp.addData('thisBlockDuration', thisBlockDuration)
+            thisExp.addData('blockDuration', thisBlockDuration)
             # record number of trials completed in the block - need this for yoking congruent blocks
-            numCompletedTrials = trial_list.thisN
+            numCompletedTrials = trial_list.thisN + 1
             thisExp.addData('numCompletedTrials', numCompletedTrials)
+            meanISI = thisBlockDuration / numCompletedTrials
+            thisExp.addData('meanISI', meanISI)
             trial_list.finished = True
             continueRoutine = False
-            
-        
         # the Routine "feedback" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         thisExp.nextEntry()
@@ -994,13 +989,13 @@ beh_df = pd.read_csv(tempfile + '.csv')
 
 os.remove(tempfile + '.csv')
 
-n_blocks = beh_df["msit_block_condition_order.thisN"].nunique()
+n_blocks = beh_df["stroop_block_condition_order.thisN"].nunique()
 unique_blocks = np.arange(n_blocks)
 
 condition, onset, duration, mean_rt, mean_accuracy, num_trials = [], [], [], [], [], []
 
 for i_block in unique_blocks:
-    this_block_idxs = beh_df[beh_df["msit_block_condition_order.thisN"]==i_block].index
+    this_block_idxs = beh_df[beh_df["stroop_block_condition_order.thisN"]==i_block].index
     condition.append(beh_df.loc[this_block_idxs[0], 'Condition'])
     onset.append(beh_df.loc[this_block_idxs[0], 'blockOnset'])
     duration.append(beh_df.loc[this_block_idxs[::-1][0], 'blockDuration'])
